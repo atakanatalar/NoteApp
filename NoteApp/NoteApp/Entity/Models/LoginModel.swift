@@ -19,11 +19,11 @@ struct LoginModel: Codable {
 
 struct LoginResponse: Codable {
     let code: String
-    let data: DataClass?
+    let data: LoginDataClass?
     let message: String
 }
 
-struct DataClass: Codable {
+struct LoginDataClass: Codable {
     let accessToken, tokenType: String
 
     enum CodingKeys: String, CodingKey {
