@@ -21,6 +21,7 @@ class LoginVC: UIViewController {
         configureViewController()
         configureUIElements()
         layoutUI()
+        KeyboardHelper.createDismissKeyboardTapGesture(view: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {

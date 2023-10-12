@@ -25,6 +25,7 @@
 		0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22F72AD8126E003CA111 /* RegisterVC.swift */; };
 		0C2B22FA2AD81716003CA111 /* NARegisterInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22F92AD81716003CA111 /* NARegisterInputVC.swift */; };
 		0C2B22FC2AD81A26003CA111 /* NAForgotPasswordInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22FB2AD81A26003CA111 /* NAForgotPasswordInputVC.swift */; };
+		0C2B23002AD81D54003CA111 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22FF2AD81D54003CA111 /* KeyboardHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		0C2B22F72AD8126E003CA111 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		0C2B22F92AD81716003CA111 /* NARegisterInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NARegisterInputVC.swift; sourceTree = "<group>"; };
 		0C2B22FB2AD81A26003CA111 /* NAForgotPasswordInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAForgotPasswordInputVC.swift; sourceTree = "<group>"; };
+		0C2B22FF2AD81D54003CA111 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				0C2B22CA2AD74364003CA111 /* AppDelegate */,
 				0C2B22CB2AD743F4003CA111 /* Scenes */,
 				0C2B22D22AD7452E003CA111 /* UIComponents */,
+				0C2B22FD2AD81CCD003CA111 /* Utilities */,
 				0C2B22C42AD74301003CA111 /* Info.plist */,
 				0C2B22C12AD74301003CA111 /* LaunchScreen.storyboard */,
 			);
@@ -215,6 +218,22 @@
 			path = "AuthInputVC's";
 			sourceTree = "<group>";
 		};
+		0C2B22FD2AD81CCD003CA111 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22FE2AD81CEE003CA111 /* Helper */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0C2B22FE2AD81CEE003CA111 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22FF2AD81D54003CA111 /* KeyboardHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -291,6 +310,7 @@
 				0C2B22EE2AD80CFA003CA111 /* NAAuthHeaderVC.swift in Sources */,
 				0C2B22FC2AD81A26003CA111 /* NAForgotPasswordInputVC.swift in Sources */,
 				0C2B22CE2AD74413003CA111 /* SplashVC.swift in Sources */,
+				0C2B23002AD81D54003CA111 /* KeyboardHelper.swift in Sources */,
 				0C2B22FA2AD81716003CA111 /* NARegisterInputVC.swift in Sources */,
 				0C2B22E12AD806D3003CA111 /* NATitleLabel.swift in Sources */,
 				0C2B22D12AD74458003CA111 /* LoginVC.swift in Sources */,

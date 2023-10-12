@@ -21,6 +21,7 @@ class RegisterVC: UIViewController {
         configureViewController()
         configureUIElements()
         layoutUI()
+        KeyboardHelper.createDismissKeyboardTapGesture(view: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +38,7 @@ class RegisterVC: UIViewController {
             titleLabelText: "Register",
             secondaryTitleLabelText: "Sign up to continue using our app"
         )
+        
         registerInputVC = NARegisterInputVC(
             descriptionLabelText: "Already have an account?",
             delegate: self
