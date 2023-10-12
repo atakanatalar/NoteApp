@@ -24,6 +24,7 @@
 		0C2B22F62AD81238003CA111 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22F52AD81238003CA111 /* ForgotPasswordVC.swift */; };
 		0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22F72AD8126E003CA111 /* RegisterVC.swift */; };
 		0C2B22FA2AD81716003CA111 /* NARegisterInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22F92AD81716003CA111 /* NARegisterInputVC.swift */; };
+		0C2B22FC2AD81A26003CA111 /* NAForgotPasswordInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22FB2AD81A26003CA111 /* NAForgotPasswordInputVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		0C2B22F52AD81238003CA111 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		0C2B22F72AD8126E003CA111 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		0C2B22F92AD81716003CA111 /* NARegisterInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NARegisterInputVC.swift; sourceTree = "<group>"; };
+		0C2B22FB2AD81A26003CA111 /* NAForgotPasswordInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAForgotPasswordInputVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 			children = (
 				0C2B22EF2AD810CD003CA111 /* NALoginInputVC.swift */,
 				0C2B22F92AD81716003CA111 /* NARegisterInputVC.swift */,
+				0C2B22FB2AD81A26003CA111 /* NAForgotPasswordInputVC.swift */,
 			);
 			path = "AuthInputVC's";
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				0C2B22E52AD806F6003CA111 /* NABodyLabel.swift in Sources */,
 				0C2B22EB2AD80BFE003CA111 /* NAAuthItemView.swift in Sources */,
 				0C2B22EE2AD80CFA003CA111 /* NAAuthHeaderVC.swift in Sources */,
+				0C2B22FC2AD81A26003CA111 /* NAForgotPasswordInputVC.swift in Sources */,
 				0C2B22CE2AD74413003CA111 /* SplashVC.swift in Sources */,
 				0C2B22FA2AD81716003CA111 /* NARegisterInputVC.swift in Sources */,
 				0C2B22E12AD806D3003CA111 /* NATitleLabel.swift in Sources */,
