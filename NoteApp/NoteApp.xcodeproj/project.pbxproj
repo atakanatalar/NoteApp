@@ -26,6 +26,7 @@
 		0C2B22FA2AD81716003CA111 /* NARegisterInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22F92AD81716003CA111 /* NARegisterInputVC.swift */; };
 		0C2B22FC2AD81A26003CA111 /* NAForgotPasswordInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22FB2AD81A26003CA111 /* NAForgotPasswordInputVC.swift */; };
 		0C2B23002AD81D54003CA111 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22FF2AD81D54003CA111 /* KeyboardHelper.swift */; };
+		0C2B23052AD823A7003CA111 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B23042AD823A7003CA111 /* KeychainManager.swift */; };
 		E6D550D1A42923816271E23F /* Pods_NoteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EB5A3089F50F85D82742C0 /* Pods_NoteApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		0C2B22F92AD81716003CA111 /* NARegisterInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NARegisterInputVC.swift; sourceTree = "<group>"; };
 		0C2B22FB2AD81A26003CA111 /* NAForgotPasswordInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAForgotPasswordInputVC.swift; sourceTree = "<group>"; };
 		0C2B22FF2AD81D54003CA111 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
+		0C2B23042AD823A7003CA111 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		635CCE026104C643447622A9 /* Pods-NoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.release.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.release.xcconfig"; sourceTree = "<group>"; };
 		78EB5A3089F50F85D82742C0 /* Pods_NoteApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC38B27C60B989A8B4621882 /* Pods-NoteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.debug.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		0C2B22B52AD742FF003CA111 /* NoteApp */ = {
 			isa = PBXGroup;
 			children = (
+				0C2B23022AD82349003CA111 /* DataProvider */,
 				0C2B22CA2AD74364003CA111 /* AppDelegate */,
 				0C2B22CB2AD743F4003CA111 /* Scenes */,
 				0C2B22D22AD7452E003CA111 /* UIComponents */,
@@ -241,6 +244,22 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		0C2B23022AD82349003CA111 /* DataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B23032AD8235C003CA111 /* Managers */,
+			);
+			path = DataProvider;
+			sourceTree = "<group>";
+		};
+		0C2B23032AD8235C003CA111 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B23042AD823A7003CA111 /* KeychainManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		4BD36E0A2E4B097135A2F7C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +274,6 @@
 				CC38B27C60B989A8B4621882 /* Pods-NoteApp.debug.xcconfig */,
 				635CCE026104C643447622A9 /* Pods-NoteApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -386,6 +404,7 @@
 				0C2B22DC2AD805A8003CA111 /* NAPrimaryButton.swift in Sources */,
 				0C2B22F62AD81238003CA111 /* ForgotPasswordVC.swift in Sources */,
 				0C2B22F02AD810CD003CA111 /* NALoginInputVC.swift in Sources */,
+				0C2B23052AD823A7003CA111 /* KeychainManager.swift in Sources */,
 				0C2B22E92AD80AE6003CA111 /* NATextField.swift in Sources */,
 				0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */,
 				0C2B22DE2AD805B9003CA111 /* NASecondaryButton.swift in Sources */,
