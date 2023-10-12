@@ -12,6 +12,17 @@
 		0C2B22C32AD74301003CA111 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C2B22C12AD74301003CA111 /* LaunchScreen.storyboard */; };
 		0C2B22CE2AD74413003CA111 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22CD2AD74413003CA111 /* SplashVC.swift */; };
 		0C2B22D12AD74458003CA111 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22D02AD74458003CA111 /* LoginVC.swift */; };
+		0C2B22DC2AD805A8003CA111 /* NAPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22DB2AD805A8003CA111 /* NAPrimaryButton.swift */; };
+		0C2B22DE2AD805B9003CA111 /* NASecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22DD2AD805B9003CA111 /* NASecondaryButton.swift */; };
+		0C2B22E12AD806D3003CA111 /* NATitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22E02AD806D3003CA111 /* NATitleLabel.swift */; };
+		0C2B22E52AD806F6003CA111 /* NABodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22E42AD806F6003CA111 /* NABodyLabel.swift */; };
+		0C2B22E72AD8071E003CA111 /* NASecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22E62AD8071E003CA111 /* NASecondaryTitleLabel.swift */; };
+		0C2B22E92AD80AE6003CA111 /* NATextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22E82AD80AE6003CA111 /* NATextField.swift */; };
+		0C2B22EB2AD80BFE003CA111 /* NAAuthItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22EA2AD80BFE003CA111 /* NAAuthItemView.swift */; };
+		0C2B22EE2AD80CFA003CA111 /* NAAuthHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22ED2AD80CFA003CA111 /* NAAuthHeaderVC.swift */; };
+		0C2B22F02AD810CD003CA111 /* NALoginInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22EF2AD810CD003CA111 /* NALoginInputVC.swift */; };
+		0C2B22F62AD81238003CA111 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22F52AD81238003CA111 /* ForgotPasswordVC.swift */; };
+		0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B22F72AD8126E003CA111 /* RegisterVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +33,17 @@
 		0C2B22C42AD74301003CA111 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C2B22CD2AD74413003CA111 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		0C2B22D02AD74458003CA111 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		0C2B22DB2AD805A8003CA111 /* NAPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAPrimaryButton.swift; sourceTree = "<group>"; };
+		0C2B22DD2AD805B9003CA111 /* NASecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASecondaryButton.swift; sourceTree = "<group>"; };
+		0C2B22E02AD806D3003CA111 /* NATitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NATitleLabel.swift; sourceTree = "<group>"; };
+		0C2B22E42AD806F6003CA111 /* NABodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NABodyLabel.swift; sourceTree = "<group>"; };
+		0C2B22E62AD8071E003CA111 /* NASecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASecondaryTitleLabel.swift; sourceTree = "<group>"; };
+		0C2B22E82AD80AE6003CA111 /* NATextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NATextField.swift; sourceTree = "<group>"; };
+		0C2B22EA2AD80BFE003CA111 /* NAAuthItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAAuthItemView.swift; sourceTree = "<group>"; };
+		0C2B22ED2AD80CFA003CA111 /* NAAuthHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAAuthHeaderVC.swift; sourceTree = "<group>"; };
+		0C2B22EF2AD810CD003CA111 /* NALoginInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NALoginInputVC.swift; sourceTree = "<group>"; };
+		0C2B22F52AD81238003CA111 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		0C2B22F72AD8126E003CA111 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				0C2B22D02AD74458003CA111 /* LoginVC.swift */,
+				0C2B22F52AD81238003CA111 /* ForgotPasswordVC.swift */,
+				0C2B22F72AD8126E003CA111 /* RegisterVC.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -99,6 +123,7 @@
 		0C2B22D22AD7452E003CA111 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				0C2B22D52AD80521003CA111 /* CustomViews */,
 				0C2B22D32AD7453E003CA111 /* Resources */,
 			);
 			path = UIComponents;
@@ -118,6 +143,70 @@
 				0C2B22BF2AD74301003CA111 /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		0C2B22D52AD80521003CA111 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22D62AD80531003CA111 /* Buttons */,
+				0C2B22D72AD8053D003CA111 /* Labels */,
+				0C2B22D82AD80543003CA111 /* TextFields */,
+				0C2B22DA2AD80552003CA111 /* Views */,
+				0C2B22D92AD8054B003CA111 /* ViewControllers */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		0C2B22D62AD80531003CA111 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22DB2AD805A8003CA111 /* NAPrimaryButton.swift */,
+				0C2B22DD2AD805B9003CA111 /* NASecondaryButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		0C2B22D72AD8053D003CA111 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22E42AD806F6003CA111 /* NABodyLabel.swift */,
+				0C2B22E62AD8071E003CA111 /* NASecondaryTitleLabel.swift */,
+				0C2B22E02AD806D3003CA111 /* NATitleLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		0C2B22D82AD80543003CA111 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22E82AD80AE6003CA111 /* NATextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		0C2B22D92AD8054B003CA111 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22EC2AD80CCC003CA111 /* AuthInputVC's */,
+				0C2B22ED2AD80CFA003CA111 /* NAAuthHeaderVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0C2B22DA2AD80552003CA111 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22EA2AD80BFE003CA111 /* NAAuthItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0C2B22EC2AD80CCC003CA111 /* AuthInputVC's */ = {
+			isa = PBXGroup;
+			children = (
+				0C2B22EF2AD810CD003CA111 /* NALoginInputVC.swift */,
+			);
+			path = "AuthInputVC's";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,8 +280,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C2B22B72AD742FF003CA111 /* AppDelegate.swift in Sources */,
+				0C2B22E52AD806F6003CA111 /* NABodyLabel.swift in Sources */,
+				0C2B22EB2AD80BFE003CA111 /* NAAuthItemView.swift in Sources */,
+				0C2B22EE2AD80CFA003CA111 /* NAAuthHeaderVC.swift in Sources */,
 				0C2B22CE2AD74413003CA111 /* SplashVC.swift in Sources */,
+				0C2B22E12AD806D3003CA111 /* NATitleLabel.swift in Sources */,
 				0C2B22D12AD74458003CA111 /* LoginVC.swift in Sources */,
+				0C2B22DC2AD805A8003CA111 /* NAPrimaryButton.swift in Sources */,
+				0C2B22F62AD81238003CA111 /* ForgotPasswordVC.swift in Sources */,
+				0C2B22F02AD810CD003CA111 /* NALoginInputVC.swift in Sources */,
+				0C2B22E92AD80AE6003CA111 /* NATextField.swift in Sources */,
+				0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */,
+				0C2B22DE2AD805B9003CA111 /* NASecondaryButton.swift in Sources */,
+				0C2B22E72AD8071E003CA111 /* NASecondaryTitleLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
