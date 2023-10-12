@@ -81,12 +81,32 @@ class RegisterVC: UIViewController {
 extension RegisterVC: NARegisterInputVCDelegate {
     
     func didTapSignUpButton() {
-        let name = registerInputVC.inputViewOne.textField.text
-        let email = registerInputVC.inputViewTwo.textField.text
-        let password = registerInputVC.inputViewThree.textField.text
+        guard let name = registerInputVC.inputViewOne.textField.text,
+              let email = registerInputVC.inputViewTwo.textField.text,
+              let password = registerInputVC.inputViewThree.textField.text else { return }
         
-        if let name = name, let email = email, let password = password {
-            print("name: \(name)\nemail: \(email)\npassword: \(password)")
+        let registerModel = RegisterModel(name: name, email: email, password: password)
+        
+        APIManager.sharedInstance.callingRegisterAPI(registerModel: registerModel) { [weak self] isSuccess in
+            guard let self = self else { return }
+            
+            if isSuccess {
+                let code = APIManager.sharedInstance.registerResponse?.code
+                let message = APIManager.sharedInstance.registerResponse?.message
+                
+                if let message = message, let code = code {
+                    print("code: \(code), message: \(message)")
+                }
+                
+                if code == "common.success" {
+                    let notesVC = NotesVC()
+                    navigationController?.pushViewController(notesVC, animated: true)
+                } else {
+                    print("alert")
+                }
+            } else {
+                print("failure")
+            }
         }
     }
     
