@@ -31,6 +31,7 @@
 		0C2B230B2AD82BC3003CA111 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B230A2AD82BC3003CA111 /* APIManager.swift */; };
 		0C2B230E2AD82D67003CA111 /* NotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B230D2AD82D67003CA111 /* NotesVC.swift */; };
 		0C2B23102AD831E6003CA111 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B230F2AD831E6003CA111 /* RegisterModel.swift */; };
+		0C2B23122AD838DF003CA111 /* ForgotPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B23112AD838DF003CA111 /* ForgotPasswordModel.swift */; };
 		E6D550D1A42923816271E23F /* Pods_NoteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EB5A3089F50F85D82742C0 /* Pods_NoteApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		0C2B230A2AD82BC3003CA111 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		0C2B230D2AD82D67003CA111 /* NotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesVC.swift; sourceTree = "<group>"; };
 		0C2B230F2AD831E6003CA111 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		0C2B23112AD838DF003CA111 /* ForgotPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModel.swift; sourceTree = "<group>"; };
 		635CCE026104C643447622A9 /* Pods-NoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.release.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.release.xcconfig"; sourceTree = "<group>"; };
 		78EB5A3089F50F85D82742C0 /* Pods_NoteApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC38B27C60B989A8B4621882 /* Pods-NoteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.debug.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			children = (
 				0C2B23082AD82A9E003CA111 /* LoginModel.swift */,
 				0C2B230F2AD831E6003CA111 /* RegisterModel.swift */,
+				0C2B23112AD838DF003CA111 /* ForgotPasswordModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C2B23092AD82A9F003CA111 /* LoginModel.swift in Sources */,
+				0C2B23122AD838DF003CA111 /* ForgotPasswordModel.swift in Sources */,
 				0C2B22B72AD742FF003CA111 /* AppDelegate.swift in Sources */,
 				0C2B22E52AD806F6003CA111 /* NABodyLabel.swift in Sources */,
 				0C2B22EB2AD80BFE003CA111 /* NAAuthItemView.swift in Sources */,

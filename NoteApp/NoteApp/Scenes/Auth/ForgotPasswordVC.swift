@@ -78,10 +78,29 @@ class ForgotPasswordVC: UIViewController {
 
 extension ForgotPasswordVC: NAForgotPasswordInputVCDelegate {
     func didTapResetPasswordButton() {
-        let email = forgotPasswordInputVC.inputViewOne.textField.text
+        guard let email = forgotPasswordInputVC.inputViewOne.textField.text else { return }
         
-        if let email = email {
-            print("email: \(email)")
+        let forgotPasswordModel = ForgotPasswordModel(email: email)
+        
+        APIManager.sharedInstance.callingForgotPasswordAPI(forgotPasswordModel: forgotPasswordModel) { [weak self] isSuccess in
+            guard let self = self else { return }
+            
+            if isSuccess {
+                let code = APIManager.sharedInstance.forgotPasswordResponse?.code
+                let message = APIManager.sharedInstance.forgotPasswordResponse?.message
+                
+                if let message = message, let code = code {
+                    print("code: \(code), message: \(message)")
+                }
+                
+                if code == "auth.forgot-password" {
+                    print("success")
+                } else {
+                    print("alert")
+                }
+            } else {
+                print("failure")
+            }
         }
     }
 }

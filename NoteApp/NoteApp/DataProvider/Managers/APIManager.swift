@@ -15,6 +15,7 @@ class APIManager {
     
     var loginResponse: LoginResponse?
     var registerResponse: RegisterResponse?
+    var forgotPasswordResponse: ForgotPasswordResponse?
     
     func callingLoginAPI(loginModel: LoginModel, completionHandler: @escaping (Bool) -> ()) {
         let headers: HTTPHeaders = [.contentType("application/json")]
@@ -53,6 +54,29 @@ class APIManager {
                 if let registerResponse = try? JSONDecoder().decode(response, from: data) {
                     KeychainManager().saveAccessTokenToKeychain(registerResponse.data?.accessToken)
                     self.registerResponse = registerResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case.failure(let error):
+                print(error.localizedDescription)
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingForgotPasswordAPI(forgotPasswordModel: ForgotPasswordModel, completionHandler: @escaping (Bool) -> ()) {
+        let headers: HTTPHeaders = [.contentType("application/json")]
+        
+        AF.request("\(baseUrl)auth/forgot-password", method: .post, parameters: forgotPasswordModel, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result {
+            case.success(let data):
+                guard let data = data else { return }
+                
+                let response = ForgotPasswordResponse.self
+                
+                if let forgotPasswordResponse = try? JSONDecoder().decode(response, from: data) {
+                    self.forgotPasswordResponse = forgotPasswordResponse
                     completionHandler(true)
                 } else {
                     completionHandler(false)
