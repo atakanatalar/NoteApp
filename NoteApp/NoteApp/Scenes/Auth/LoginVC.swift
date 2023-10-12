@@ -86,11 +86,31 @@ extension LoginVC: NALoginInputVCDelegate {
     }
     
     func didTapSignInButton() {
-        let email = loginInputVC.inputViewOne.textField.text
-        let password = loginInputVC.inputViewTwo.textField.text
+        guard let email = loginInputVC.inputViewOne.textField.text,
+              let password = loginInputVC.inputViewTwo.textField.text else { return }
         
-        if let email = email, let password = password {
-            print("email: \(email)\npassword: \(password)")
+        let loginModel = LoginModel(email: email, password: password)
+        
+        APIManager.sharedInstance.callingLoginAPI(loginModel: loginModel) { [weak self] isSuccess in
+            guard let self = self else { return }
+            
+            if isSuccess {
+                let code = APIManager.sharedInstance.loginResponse?.code
+                let message = APIManager.sharedInstance.loginResponse?.message
+                
+                if let message = message, let code = code {
+                    print("code: \(code), message: \(message)")
+                }
+                
+                if code == "common.success" {
+                    let notesVC = NotesVC()
+                    navigationController?.pushViewController(notesVC, animated: true)
+                } else {
+                    print("alert")
+                }
+            } else {
+                print("failure")
+            }
         }
     }
     
