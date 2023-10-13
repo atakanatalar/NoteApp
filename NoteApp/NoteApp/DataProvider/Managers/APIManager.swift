@@ -16,6 +16,9 @@ class APIManager {
     var loginResponse: LoginResponse?
     var registerResponse: RegisterResponse?
     var forgotPasswordResponse: ForgotPasswordResponse?
+    var getMyNotesModelResponse: GetMyNotesModelResponse?
+    var getNoteResponse: GetNoteResponse?
+    var deleteNoteResponse: DeleteNoteResponse?
     
     func callingLoginAPI(loginModel: LoginModel, completionHandler: @escaping (Bool) -> ()) {
         let headers: HTTPHeaders = [.contentType("application/json")]
@@ -77,6 +80,75 @@ class APIManager {
                 
                 if let forgotPasswordResponse = try? JSONDecoder().decode(response, from: data) {
                     self.forgotPasswordResponse = forgotPasswordResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case.failure(let error):
+                print(error.localizedDescription)
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingGetMyNotesAPI(getMyNotesModel: GetMyNotesModel, completionHandler: @escaping (Bool) -> ()) {
+        let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        
+        AF.request("\(baseUrl)users/me/notes?page=1", method: .get, parameters: getMyNotesModel.asDictionary(), encoding: URLEncoding(destination: .queryString), headers: headers).response { response in
+            switch response.result {
+            case .success(let data):
+                guard let data = data else { return }
+                
+                let response = GetMyNotesModelResponse.self
+                
+                if let getMyNotesModelResponse = try? JSONDecoder().decode(response, from: data) {
+                    self.getMyNotesModelResponse = getMyNotesModelResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case .failure(let error):
+                print("Request failed with error: \(error.localizedDescription)")
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingGetNoteAPI(noteId: Int, getNoteModel: GetNoteModel, completionHandler: @escaping (Bool) -> ()) {
+        let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        
+        AF.request("\(baseUrl)notes/\(noteId)", method: .get, parameters: getNoteModel.asDictionary(), encoding: URLEncoding(destination: .queryString), headers: headers).response { response in
+            switch response.result {
+            case .success(let data):
+                guard let data = data else { return }
+                
+                let response = GetNoteResponse.self
+                
+                if let getNoteResponse = try? JSONDecoder().decode(response, from: data) {
+                    self.getNoteResponse = getNoteResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case .failure(let error):
+                print("Request failed with error: \(error.localizedDescription)")
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingDeleteNoteAPI(noteId: Int, deleteNoteModel: DeleteNoteModel, completionHandler: @escaping (Bool) -> ()) {
+            let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        
+        AF.request("\(baseUrl)notes/\(noteId)", method: .delete, parameters: deleteNoteModel, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result {
+            case.success(let data):
+                guard let data = data else { return }
+                
+                let response = DeleteNoteResponse.self
+                
+                if let deleteNoteResponse = try? JSONDecoder().decode(response, from: data) {
+                    self.deleteNoteResponse = deleteNoteResponse
                     completionHandler(true)
                 } else {
                     completionHandler(false)

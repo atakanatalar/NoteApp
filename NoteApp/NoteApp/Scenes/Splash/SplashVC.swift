@@ -16,7 +16,7 @@ class SplashVC: UIViewController {
 
         view.backgroundColor = .systemMint
         
-        let viewController = LoginVC()
+        let viewController = NotesVC()
         self.navController = UINavigationController(rootViewController: viewController)
 
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
