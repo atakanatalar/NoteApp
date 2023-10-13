@@ -11,6 +11,8 @@ class NotesVC: UIViewController {
     
     let tableView = UITableView()
     
+    let toolbarTitleLabel = NABodyLabel(textAlignment: .center)
+    
     var data: [Datum] = []
     var filteredData: [Datum] = []
     
@@ -36,11 +38,16 @@ class NotesVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .systemPurple
         
-        let createNoteButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(createNoteButtonTapped))
-        navigationItem.rightBarButtonItem = createNoteButton
+        navigationController?.isToolbarHidden = false
+        navigationController?.toolbar.tintColor = .systemPurple
         
         let profileButton = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(profileButtonTapped))
-        navigationItem.leftBarButtonItem = profileButton
+        navigationItem.rightBarButtonItem = profileButton
+        
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let createNoteButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(createNoteButtonTapped))
+        let title = UIBarButtonItem(customView: toolbarTitleLabel)
+        setToolbarItems([spaceItem, title, spaceItem, createNoteButton], animated: true)
     }
     
     func configureSearchController() {
@@ -68,6 +75,7 @@ class NotesVC: UIViewController {
             
             if isSuccess {
                 data = (APIManager.sharedInstance.getMyNotesModelResponse?.data.data)!
+                toolbarTitleLabel.text = "\(data.count) Notes"
                 print("data: \(data)")
                 updateUI(with: data)
             } else {
