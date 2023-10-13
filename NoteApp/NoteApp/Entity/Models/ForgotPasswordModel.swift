@@ -17,13 +17,13 @@ struct ForgotPasswordModel: Codable {
     
 struct ForgotPasswordResponse: Codable {
     let code: String
-    let data: JSONNull?
+    let data: ForgotPasswordJSONNull?
     let message: String
 }
 
-class JSONNull: Codable, Hashable {
+class ForgotPasswordJSONNull: Codable, Hashable {
 
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
+    public static func == (lhs: ForgotPasswordJSONNull, rhs: ForgotPasswordJSONNull) -> Bool {
         return true
     }
 
@@ -36,7 +36,7 @@ class JSONNull: Codable, Hashable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if !container.decodeNil() {
-            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
+            throw DecodingError.typeMismatch(ForgotPasswordJSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
         }
     }
 
