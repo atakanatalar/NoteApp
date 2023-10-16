@@ -14,9 +14,11 @@ protocol NANoteVCDelegate: AnyObject {
 class NANoteVC: UIViewController {
     
     let stackView = UIStackView()
+    
     let noteItemViewOne = NANoteItemView()
     let noteItemViewTwo = NANoteItemView()
-    let saveNoteButton = NAPrimaryButton(color: .systemPurple, title: "Save Note", systemImageName: "plus")
+    
+    let saveNoteButton = NAPrimaryButton(color: .systemPurple, title: "Save Note", systemImageName: "checkmark")
     
     weak var delegate: NANoteVCDelegate!
     
