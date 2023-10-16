@@ -37,6 +37,9 @@
 		0C2B23212AD982D1003CA111 /* NoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B23202AD982D1003CA111 /* NoteVC.swift */; };
 		0C2B23232AD999C3003CA111 /* DeleteNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B23222AD999C3003CA111 /* DeleteNoteModel.swift */; };
 		0C2B23252AD99FAE003CA111 /* GetNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B23242AD99FAE003CA111 /* GetNoteModel.swift */; };
+		0CEC6CA52ADC9D2D00F060C1 /* NANoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */; };
+		0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */; };
+		0CEC6CA92ADC9E7900F060C1 /* NANoteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */; };
 		E6D550D1A42923816271E23F /* Pods_NoteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EB5A3089F50F85D82742C0 /* Pods_NoteApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +76,9 @@
 		0C2B23202AD982D1003CA111 /* NoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteVC.swift; sourceTree = "<group>"; };
 		0C2B23222AD999C3003CA111 /* DeleteNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNoteModel.swift; sourceTree = "<group>"; };
 		0C2B23242AD99FAE003CA111 /* GetNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteModel.swift; sourceTree = "<group>"; };
+		0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteVC.swift; sourceTree = "<group>"; };
+		0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NATextView.swift; sourceTree = "<group>"; };
+		0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteItemView.swift; sourceTree = "<group>"; };
 		635CCE026104C643447622A9 /* Pods-NoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.release.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.release.xcconfig"; sourceTree = "<group>"; };
 		78EB5A3089F50F85D82742C0 /* Pods_NoteApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC38B27C60B989A8B4621882 /* Pods-NoteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.debug.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +193,7 @@
 		0C2B22D52AD80521003CA111 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0CEC6CA32ADC9C8E00F060C1 /* TextViews */,
 				0C2B23152AD93562003CA111 /* Cells */,
 				0C2B22D62AD80531003CA111 /* Buttons */,
 				0C2B22D72AD8053D003CA111 /* Labels */,
@@ -229,6 +236,7 @@
 			children = (
 				0C2B22EC2AD80CCC003CA111 /* AuthInputVC's */,
 				0C2B22ED2AD80CFA003CA111 /* NAAuthHeaderVC.swift */,
+				0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -237,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2B22EA2AD80BFE003CA111 /* NAAuthItemView.swift */,
+				0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -320,6 +329,14 @@
 				0C2B23162AD93596003CA111 /* NANotesListCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		0CEC6CA32ADC9C8E00F060C1 /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */,
+			);
+			path = TextViews;
 			sourceTree = "<group>";
 		};
 		4BD36E0A2E4B097135A2F7C5 /* Frameworks */ = {
@@ -464,16 +481,19 @@
 				0C2B23102AD831E6003CA111 /* RegisterModel.swift in Sources */,
 				0C2B22CE2AD74413003CA111 /* SplashVC.swift in Sources */,
 				0C2B23002AD81D54003CA111 /* KeyboardHelper.swift in Sources */,
+				0CEC6CA52ADC9D2D00F060C1 /* NANoteVC.swift in Sources */,
 				0C2B22FA2AD81716003CA111 /* NARegisterInputVC.swift in Sources */,
 				0C2B23252AD99FAE003CA111 /* GetNoteModel.swift in Sources */,
 				0C2B22E12AD806D3003CA111 /* NATitleLabel.swift in Sources */,
 				0C2B22D12AD74458003CA111 /* LoginVC.swift in Sources */,
 				0C2B23212AD982D1003CA111 /* NoteVC.swift in Sources */,
+				0CEC6CA92ADC9E7900F060C1 /* NANoteItemView.swift in Sources */,
 				0C2B22DC2AD805A8003CA111 /* NAPrimaryButton.swift in Sources */,
 				0C2B230B2AD82BC3003CA111 /* APIManager.swift in Sources */,
 				0C2B22F62AD81238003CA111 /* ForgotPasswordVC.swift in Sources */,
 				0C2B22F02AD810CD003CA111 /* NALoginInputVC.swift in Sources */,
 				0C2B23052AD823A7003CA111 /* KeychainManager.swift in Sources */,
+				0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */,
 				0C2B23232AD999C3003CA111 /* DeleteNoteModel.swift in Sources */,
 				0C2B22E92AD80AE6003CA111 /* NATextField.swift in Sources */,
 				0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */,
