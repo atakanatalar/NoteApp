@@ -20,6 +20,7 @@ class APIManager {
     var getNoteResponse: GetNoteResponse?
     var deleteNoteResponse: DeleteNoteResponse?
     var updateNoteResponse: UpdateNoteResponse?
+    var createNoteResponse: CreateNoteResponse?
     
     func callingLoginAPI(loginModel: LoginModel, completionHandler: @escaping (Bool) -> ()) {
         let headers: HTTPHeaders = [.contentType("application/json")]
@@ -139,7 +140,7 @@ class APIManager {
     }
     
     func callingDeleteNoteAPI(noteId: Int, deleteNoteModel: DeleteNoteModel, completionHandler: @escaping (Bool) -> ()) {
-            let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
         
         AF.request("\(baseUrl)notes/\(noteId)", method: .delete, parameters: deleteNoteModel, encoder: JSONParameterEncoder.default, headers: headers).response { response in
             switch response.result {
@@ -162,7 +163,7 @@ class APIManager {
     }
     
     func callingUpdateNoteAPI(noteId: Int, updateNoteModel: UpdateNoteModel, completionHandler: @escaping (Bool) -> ()) {
-            let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
         
         AF.request("\(baseUrl)notes/\(noteId)", method: .put, parameters: updateNoteModel, encoder: JSONParameterEncoder.default,  headers: headers).response { response in
             switch response.result {
@@ -173,6 +174,30 @@ class APIManager {
                 
                 if let updateNoteResponse = try? JSONDecoder().decode(response, from: data) {
                     self.updateNoteResponse = updateNoteResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case.failure(let error):
+                print(error.localizedDescription)
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingCreateNoteAPI(createNoteModel: CreateNoteModel, completionHandler: @escaping (Bool) -> ()) {
+        let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        
+        AF.request("\(baseUrl)notes",  method: .post, parameters: createNoteModel, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result {
+            case.success(let data):
+                guard let data = data else { return }
+                
+                let response = CreateNoteResponse.self
+                
+                if let createNoteResponse = try? JSONDecoder().decode(response, from: data) {
+                    print(createNoteResponse.data)
+                    self.createNoteResponse = createNoteResponse
                     completionHandler(true)
                 } else {
                     completionHandler(false)

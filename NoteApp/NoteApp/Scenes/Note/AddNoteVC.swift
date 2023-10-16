@@ -72,6 +72,30 @@ class AddNoteVC: UIViewController {
 
 extension AddNoteVC: NAAddNoteVCDelegate {
     func didTapAddNoteButton() {
-        print("Add button tapped")
+        guard let title = addNoteVC.noteItemViewOne.textView.text,
+              let note = addNoteVC.noteItemViewTwo.textView.text else { return }
+        
+        let createNoteModel = CreateNoteModel(title: title, note: note)
+        
+        APIManager.sharedInstance.callingCreateNoteAPI(createNoteModel: createNoteModel) { [weak self] isSuccess in
+            guard let self = self else { return }
+            
+            if isSuccess {
+                let code = APIManager.sharedInstance.createNoteResponse?.code
+                let message = APIManager.sharedInstance.createNoteResponse?.message
+                
+                if let message = message, let code = code {
+                    print("code: \(code), message: \(message)")
+                }
+                
+                if code == "common.success" {
+                    navigationController?.popViewController(animated: true)
+                } else {
+                    print("alert")
+                }
+            } else {
+                print("failure")
+            }
+        }
     }
 }
