@@ -38,7 +38,7 @@ class NotesVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .systemPurple
         
-        navigationController?.isToolbarHidden = false
+        navigationController?.setToolbarHidden(false, animated: true)
         navigationController?.toolbar.tintColor = .systemPurple
         
         let profileButton = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(profileButtonTapped))
@@ -98,7 +98,8 @@ class NotesVC: UIViewController {
     }
     
     @objc func createNoteButtonTapped() {
-        
+        let destinationVC = AddNoteVC()
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     @objc func profileButtonTapped() {
