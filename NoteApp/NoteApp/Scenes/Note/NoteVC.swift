@@ -79,6 +79,30 @@ class NoteVC: UIViewController {
 
 extension NoteVC: NANoteVCDelegate {
     func didTapSaveNoteButton() {
-        print("Save button tapped")
+        guard let title = noteVC.noteItemViewOne.textView.text,
+              let note = noteVC.noteItemViewTwo.textView.text else { return }
+        
+        let updateModel = UpdateNoteModel(title: title, note: note)
+        
+        APIManager.sharedInstance.callingUpdateNoteAPI(noteId: data.id, updateNoteModel: updateModel) { [weak self] isSucces in
+            guard let self = self else { return }
+            
+            if isSucces {
+                let code = APIManager.sharedInstance.updateNoteResponse?.code
+                let message = APIManager.sharedInstance.updateNoteResponse?.message
+                
+                if let message = message, let code = code {
+                    print("code: \(code), message: \(message)")
+                }
+                
+                if code == "common.success" {
+                    print("updated")
+                } else {
+                    print("alert")
+                }
+            } else {
+                print("failure")
+            }
+        }
     }
 }

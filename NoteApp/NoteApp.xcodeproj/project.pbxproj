@@ -39,6 +39,7 @@
 		0C2B23252AD99FAE003CA111 /* GetNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B23242AD99FAE003CA111 /* GetNoteModel.swift */; };
 		0C3601E72ADD85CC00216DC5 /* AddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601E62ADD85CC00216DC5 /* AddNoteVC.swift */; };
 		0C3601E92ADD861D00216DC5 /* NAAddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601E82ADD861D00216DC5 /* NAAddNoteVC.swift */; };
+		0C3601EB2ADD92D300216DC5 /* UpdateNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601EA2ADD92D300216DC5 /* UpdateNoteModel.swift */; };
 		0CEC6CA52ADC9D2D00F060C1 /* NANoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */; };
 		0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */; };
 		0CEC6CA92ADC9E7900F060C1 /* NANoteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */; };
@@ -80,6 +81,7 @@
 		0C2B23242AD99FAE003CA111 /* GetNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteModel.swift; sourceTree = "<group>"; };
 		0C3601E62ADD85CC00216DC5 /* AddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteVC.swift; sourceTree = "<group>"; };
 		0C3601E82ADD861D00216DC5 /* NAAddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAAddNoteVC.swift; sourceTree = "<group>"; };
+		0C3601EA2ADD92D300216DC5 /* UpdateNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteModel.swift; sourceTree = "<group>"; };
 		0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteVC.swift; sourceTree = "<group>"; };
 		0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NATextView.swift; sourceTree = "<group>"; };
 		0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteItemView.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				0C2B231E2AD94355003CA111 /* GetMyNotesModel.swift */,
 				0C2B23222AD999C3003CA111 /* DeleteNoteModel.swift */,
 				0C2B23242AD99FAE003CA111 /* GetNoteModel.swift */,
+				0C3601EA2ADD92D300216DC5 /* UpdateNoteModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				0C2B22E92AD80AE6003CA111 /* NATextField.swift in Sources */,
 				0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */,
 				0C2B22DE2AD805B9003CA111 /* NASecondaryButton.swift in Sources */,
+				0C3601EB2ADD92D300216DC5 /* UpdateNoteModel.swift in Sources */,
 				0C2B23172AD93596003CA111 /* NANotesListCell.swift in Sources */,
 				0C2B230E2AD82D67003CA111 /* NotesVC.swift in Sources */,
 				0C2B22E72AD8071E003CA111 /* NASecondaryTitleLabel.swift in Sources */,

@@ -19,6 +19,7 @@ class APIManager {
     var getMyNotesModelResponse: GetMyNotesModelResponse?
     var getNoteResponse: GetNoteResponse?
     var deleteNoteResponse: DeleteNoteResponse?
+    var updateNoteResponse: UpdateNoteResponse?
     
     func callingLoginAPI(loginModel: LoginModel, completionHandler: @escaping (Bool) -> ()) {
         let headers: HTTPHeaders = [.contentType("application/json")]
@@ -149,6 +150,29 @@ class APIManager {
                 
                 if let deleteNoteResponse = try? JSONDecoder().decode(response, from: data) {
                     self.deleteNoteResponse = deleteNoteResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case.failure(let error):
+                print(error.localizedDescription)
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingUpdateNoteAPI(noteId: Int, updateNoteModel: UpdateNoteModel, completionHandler: @escaping (Bool) -> ()) {
+            let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        
+        AF.request("\(baseUrl)notes/\(noteId)", method: .put, parameters: updateNoteModel, encoder: JSONParameterEncoder.default,  headers: headers).response { response in
+            switch response.result {
+            case.success(let data):
+                guard let data = data else { return }
+                
+                let response = UpdateNoteResponse.self
+                
+                if let updateNoteResponse = try? JSONDecoder().decode(response, from: data) {
+                    self.updateNoteResponse = updateNoteResponse
                     completionHandler(true)
                 } else {
                     completionHandler(false)
