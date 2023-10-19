@@ -41,6 +41,13 @@
 		0C3601E92ADD861D00216DC5 /* NAAddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601E82ADD861D00216DC5 /* NAAddNoteVC.swift */; };
 		0C3601EB2ADD92D300216DC5 /* UpdateNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601EA2ADD92D300216DC5 /* UpdateNoteModel.swift */; };
 		0C3601ED2ADD973600216DC5 /* CreateNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601EC2ADD973600216DC5 /* CreateNoteModel.swift */; };
+		0C84691B2AE145890040B9DD /* NAUserInfoUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84691A2AE145890040B9DD /* NAUserInfoUpdateVC.swift */; };
+		0C84691F2AE146180040B9DD /* NAProfileHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84691E2AE146180040B9DD /* NAProfileHeaderVC.swift */; };
+		0C8469252AE148580040B9DD /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8469242AE148580040B9DD /* ProfileVC.swift */; };
+		0C8469272AE164E30040B9DD /* NAUserPasswordUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8469262AE164E30040B9DD /* NAUserPasswordUpdateVC.swift */; };
+		0C84692B2AE1B7EF0040B9DD /* GetMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84692A2AE1B7EF0040B9DD /* GetMeModel.swift */; };
+		0C84692D2AE1BB9E0040B9DD /* UserUpdateMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84692C2AE1BB9E0040B9DD /* UserUpdateMeModel.swift */; };
+		0C84692F2AE1BF150040B9DD /* UpdateMyPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84692E2AE1BF150040B9DD /* UpdateMyPasswordModel.swift */; };
 		0CEC6CA52ADC9D2D00F060C1 /* NANoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */; };
 		0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */; };
 		0CEC6CA92ADC9E7900F060C1 /* NANoteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */; };
@@ -84,6 +91,13 @@
 		0C3601E82ADD861D00216DC5 /* NAAddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAAddNoteVC.swift; sourceTree = "<group>"; };
 		0C3601EA2ADD92D300216DC5 /* UpdateNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteModel.swift; sourceTree = "<group>"; };
 		0C3601EC2ADD973600216DC5 /* CreateNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteModel.swift; sourceTree = "<group>"; };
+		0C84691A2AE145890040B9DD /* NAUserInfoUpdateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAUserInfoUpdateVC.swift; sourceTree = "<group>"; };
+		0C84691E2AE146180040B9DD /* NAProfileHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAProfileHeaderVC.swift; sourceTree = "<group>"; };
+		0C8469242AE148580040B9DD /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		0C8469262AE164E30040B9DD /* NAUserPasswordUpdateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAUserPasswordUpdateVC.swift; sourceTree = "<group>"; };
+		0C84692A2AE1B7EF0040B9DD /* GetMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeModel.swift; sourceTree = "<group>"; };
+		0C84692C2AE1BB9E0040B9DD /* UserUpdateMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdateMeModel.swift; sourceTree = "<group>"; };
+		0C84692E2AE1BF150040B9DD /* UpdateMyPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMyPasswordModel.swift; sourceTree = "<group>"; };
 		0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteVC.swift; sourceTree = "<group>"; };
 		0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NATextView.swift; sourceTree = "<group>"; };
 		0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteItemView.swift; sourceTree = "<group>"; };
@@ -148,6 +162,7 @@
 		0C2B22CB2AD743F4003CA111 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				0C8469232AE1483A0040B9DD /* Profile */,
 				0C2B230C2AD82D57003CA111 /* Note */,
 				0C2B22CF2AD74439003CA111 /* Auth */,
 				0C2B22CC2AD743FF003CA111 /* Splash */,
@@ -242,10 +257,12 @@
 		0C2B22D92AD8054B003CA111 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0C8469192AE1446D0040B9DD /* ProfileInputVC's */,
 				0C2B22EC2AD80CCC003CA111 /* AuthInputVC's */,
 				0C2B22ED2AD80CFA003CA111 /* NAAuthHeaderVC.swift */,
 				0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */,
 				0C3601E82ADD861D00216DC5 /* NAAddNoteVC.swift */,
+				0C84691E2AE146180040B9DD /* NAProfileHeaderVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -321,6 +338,9 @@
 				0C2B23242AD99FAE003CA111 /* GetNoteModel.swift */,
 				0C3601EA2ADD92D300216DC5 /* UpdateNoteModel.swift */,
 				0C3601EC2ADD973600216DC5 /* CreateNoteModel.swift */,
+				0C84692A2AE1B7EF0040B9DD /* GetMeModel.swift */,
+				0C84692C2AE1BB9E0040B9DD /* UserUpdateMeModel.swift */,
+				0C84692E2AE1BF150040B9DD /* UpdateMyPasswordModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -341,6 +361,23 @@
 				0C2B23162AD93596003CA111 /* NANotesListCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		0C8469192AE1446D0040B9DD /* ProfileInputVC's */ = {
+			isa = PBXGroup;
+			children = (
+				0C84691A2AE145890040B9DD /* NAUserInfoUpdateVC.swift */,
+				0C8469262AE164E30040B9DD /* NAUserPasswordUpdateVC.swift */,
+			);
+			path = "ProfileInputVC's";
+			sourceTree = "<group>";
+		};
+		0C8469232AE1483A0040B9DD /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0C8469242AE148580040B9DD /* ProfileVC.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		0CEC6CA32ADC9C8E00F060C1 /* TextViews */ = {
@@ -487,20 +524,24 @@
 				0C3601E72ADD85CC00216DC5 /* AddNoteVC.swift in Sources */,
 				0C2B22B72AD742FF003CA111 /* AppDelegate.swift in Sources */,
 				0C2B22E52AD806F6003CA111 /* NABodyLabel.swift in Sources */,
+				0C84691F2AE146180040B9DD /* NAProfileHeaderVC.swift in Sources */,
 				0C2B231F2AD94355003CA111 /* GetMyNotesModel.swift in Sources */,
 				0C2B22EB2AD80BFE003CA111 /* NAAuthItemView.swift in Sources */,
 				0C2B22EE2AD80CFA003CA111 /* NAAuthHeaderVC.swift in Sources */,
 				0C2B22FC2AD81A26003CA111 /* NAForgotPasswordInputVC.swift in Sources */,
 				0C2B23102AD831E6003CA111 /* RegisterModel.swift in Sources */,
 				0C2B22CE2AD74413003CA111 /* SplashVC.swift in Sources */,
+				0C8469272AE164E30040B9DD /* NAUserPasswordUpdateVC.swift in Sources */,
 				0C2B23002AD81D54003CA111 /* KeyboardHelper.swift in Sources */,
 				0C3601ED2ADD973600216DC5 /* CreateNoteModel.swift in Sources */,
 				0CEC6CA52ADC9D2D00F060C1 /* NANoteVC.swift in Sources */,
 				0C2B22FA2AD81716003CA111 /* NARegisterInputVC.swift in Sources */,
 				0C2B23252AD99FAE003CA111 /* GetNoteModel.swift in Sources */,
 				0C3601E92ADD861D00216DC5 /* NAAddNoteVC.swift in Sources */,
+				0C8469252AE148580040B9DD /* ProfileVC.swift in Sources */,
 				0C2B22E12AD806D3003CA111 /* NATitleLabel.swift in Sources */,
 				0C2B22D12AD74458003CA111 /* LoginVC.swift in Sources */,
+				0C84692B2AE1B7EF0040B9DD /* GetMeModel.swift in Sources */,
 				0C2B23212AD982D1003CA111 /* NoteVC.swift in Sources */,
 				0CEC6CA92ADC9E7900F060C1 /* NANoteItemView.swift in Sources */,
 				0C2B22DC2AD805A8003CA111 /* NAPrimaryButton.swift in Sources */,
@@ -509,8 +550,11 @@
 				0C2B22F02AD810CD003CA111 /* NALoginInputVC.swift in Sources */,
 				0C2B23052AD823A7003CA111 /* KeychainManager.swift in Sources */,
 				0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */,
+				0C84692F2AE1BF150040B9DD /* UpdateMyPasswordModel.swift in Sources */,
+				0C84691B2AE145890040B9DD /* NAUserInfoUpdateVC.swift in Sources */,
 				0C2B23232AD999C3003CA111 /* DeleteNoteModel.swift in Sources */,
 				0C2B22E92AD80AE6003CA111 /* NATextField.swift in Sources */,
+				0C84692D2AE1BB9E0040B9DD /* UserUpdateMeModel.swift in Sources */,
 				0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */,
 				0C2B22DE2AD805B9003CA111 /* NASecondaryButton.swift in Sources */,
 				0C3601EB2ADD92D300216DC5 /* UpdateNoteModel.swift in Sources */,

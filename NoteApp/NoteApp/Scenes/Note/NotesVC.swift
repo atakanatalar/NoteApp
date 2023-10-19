@@ -103,7 +103,8 @@ class NotesVC: UIViewController {
     }
     
     @objc func profileButtonTapped() {
-        
+        let destinationVC = ProfileVC()
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 

@@ -21,6 +21,9 @@ class APIManager {
     var deleteNoteResponse: DeleteNoteResponse?
     var updateNoteResponse: UpdateNoteResponse?
     var createNoteResponse: CreateNoteResponse?
+    var getMeResponse: GetMeResponse?
+    var userUpdateMeResponse: UserUpdateMeResponse?
+    var updateMyPasswordResponse: UpdateMyPasswordResponse?
     
     func callingLoginAPI(loginModel: LoginModel, completionHandler: @escaping (Bool) -> ()) {
         let headers: HTTPHeaders = [.contentType("application/json")]
@@ -198,6 +201,75 @@ class APIManager {
                 if let createNoteResponse = try? JSONDecoder().decode(response, from: data) {
                     print(createNoteResponse.data)
                     self.createNoteResponse = createNoteResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case.failure(let error):
+                print(error.localizedDescription)
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingGetMeAPI(getMeModel: GetMeModel, completionHandler: @escaping (Bool) -> ()) {
+        let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+       
+        AF.request("\(baseUrl)users/me", method: .get,  parameters: getMeModel.asDictionary(), encoding: URLEncoding(destination: .queryString), headers: headers).response { response in
+            switch response.result {
+            case .success(let data):
+                guard let data = data else { return }
+                
+                let response = GetMeResponse.self
+                
+                if let getMeResponse = try? JSONDecoder().decode(response, from: data) {
+                    self.getMeResponse = getMeResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case .failure(let error):
+                print("Request failed with error: \(error.localizedDescription)")
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingUserUpdateMeAPI(userUpdateMeModel: UserUpdateMeModel,  completionHandler: @escaping (Bool) -> ()) {
+        let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        
+        AF.request("\(baseUrl)users/me", method: .put, parameters: userUpdateMeModel, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result {
+            case.success(let data):
+                guard let data = data else { return }
+                
+                let response = UserUpdateMeResponse.self
+                
+                if let userUpdateMeResponse = try? JSONDecoder().decode(response, from: data) {
+                    self.userUpdateMeResponse = userUpdateMeResponse
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            case.failure(let error):
+                print(error.localizedDescription)
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func callingUpdateMyPasswordAPI(updateMyPasswordModel: UpdateMyPasswordModel, completionHandler: @escaping (Bool) -> ()) {
+        let headers: HTTPHeaders = [.contentType("application/json"), .authorization(bearerToken: KeychainManager().getAccessToken())]
+        
+        AF.request("\(baseUrl)users/me/password", method: .put, parameters: updateMyPasswordModel, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+            switch response.result {
+            case.success(let data):
+                guard let data = data else { return }
+                
+                let response = UpdateMyPasswordResponse.self
+                
+                if let updateMyPasswordResponse = try? JSONDecoder().decode(response, from: data) {
+                    self.updateMyPasswordResponse = updateMyPasswordResponse
                     completionHandler(true)
                 } else {
                     completionHandler(false)
