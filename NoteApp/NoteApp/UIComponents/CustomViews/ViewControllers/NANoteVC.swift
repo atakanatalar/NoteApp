@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol NANoteVCDelegate: AnyObject {
-    func didTapSaveNoteButton()
-}
+protocol NANoteVCDelegate: AnyObject {}
 
 class NANoteVC: UIViewController {
     
@@ -17,8 +15,6 @@ class NANoteVC: UIViewController {
     
     let noteItemViewOne = NANoteItemView()
     let noteItemViewTwo = NANoteItemView()
-    
-    let saveNoteButton = NAPrimaryButton(color: .systemPurple, title: "Save Note", systemImageName: "checkmark")
     
     weak var delegate: NANoteVCDelegate!
     
@@ -37,7 +33,6 @@ class NANoteVC: UIViewController {
         configureBackgroundView()
         configureStackView()
         configureItems()
-        configureButton()
         layoutUI()
     }
     
@@ -57,17 +52,8 @@ class NANoteVC: UIViewController {
         noteItemViewTwo.set(noteItemType: .note)
     }
     
-    private func configureButton() {
-        saveNoteButton.addTarget(self, action: #selector(saveNoteButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func saveNoteButtonTapped() {
-        delegate.didTapSaveNoteButton()
-    }
-    
     private func layoutUI() {
         view.addSubview(stackView)
-        view.addSubview(saveNoteButton)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -76,11 +62,6 @@ class NANoteVC: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            saveNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            saveNoteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveNoteButton.widthAnchor.constraint(equalToConstant: 200),
-            saveNoteButton.heightAnchor.constraint(equalToConstant: 48),
         ])
     }
 }

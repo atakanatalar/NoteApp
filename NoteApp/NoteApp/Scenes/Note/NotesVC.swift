@@ -20,14 +20,13 @@ class NotesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureViewController()
+        
         configureSearchController()
         configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        configureViewController()
         getNotes()
     }
     
@@ -35,6 +34,7 @@ class NotesVC: UIViewController {
         view.backgroundColor = .systemRed
         
         title = "Notes"
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .systemPurple
         

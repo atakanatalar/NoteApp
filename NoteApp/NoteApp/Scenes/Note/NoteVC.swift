@@ -38,7 +38,13 @@ class NoteVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setToolbarHidden(true, animated: true)
+        
+        navigationController?.setToolbarHidden(false, animated: true)
+        navigationController?.toolbar.tintColor = .systemPurple
+        
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let saveNoteButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(saveNoteButton))
+        setToolbarItems([spaceItem, saveNoteButton, spaceItem], animated: true)
     }
     
     func configureViewController() {
@@ -65,7 +71,7 @@ class NoteVC: UIViewController {
             noteView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             noteView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             noteView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            noteView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            noteView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
     
@@ -75,10 +81,8 @@ class NoteVC: UIViewController {
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
     }
-}
-
-extension NoteVC: NANoteVCDelegate {
-    func didTapSaveNoteButton() {
+    
+    @objc func saveNoteButton() {
         guard let title = noteVC.noteItemViewOne.textView.text,
               let note = noteVC.noteItemViewTwo.textView.text else { return }
         
@@ -106,3 +110,5 @@ extension NoteVC: NANoteVCDelegate {
         }
     }
 }
+
+extension NoteVC: NANoteVCDelegate {}

@@ -34,7 +34,13 @@ class AddNoteVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setToolbarHidden(true, animated: true)
+        
+        navigationController?.setToolbarHidden(false, animated: true)
+        navigationController?.toolbar.tintColor = .systemPurple
+        
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNoteButton))
+        setToolbarItems([spaceItem, addNoteButton, spaceItem], animated: true)
     }
     
     func configureViewController() {
@@ -68,10 +74,8 @@ class AddNoteVC: UIViewController {
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
     }
-}
-
-extension AddNoteVC: NAAddNoteVCDelegate {
-    func didTapAddNoteButton() {
+    
+    @objc func addNoteButton() {
         guard let title = addNoteVC.noteItemViewOne.textView.text,
               let note = addNoteVC.noteItemViewTwo.textView.text else { return }
         
@@ -99,3 +103,5 @@ extension AddNoteVC: NAAddNoteVCDelegate {
         }
     }
 }
+
+extension AddNoteVC: NAAddNoteVCDelegate {}

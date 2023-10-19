@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol NAAddNoteVCDelegate: AnyObject {
-    func didTapAddNoteButton()
-}
+protocol NAAddNoteVCDelegate: AnyObject {}
 
 class NAAddNoteVC: UIViewController {
     
@@ -17,8 +15,6 @@ class NAAddNoteVC: UIViewController {
     
     let noteItemViewOne = NANoteItemView()
     let noteItemViewTwo = NANoteItemView()
-    
-    let addNoteButton = NAPrimaryButton(color: .systemPurple, title: "Add Note", systemImageName: "plus")
     
     weak var delegate: NAAddNoteVCDelegate!
     
@@ -37,7 +33,6 @@ class NAAddNoteVC: UIViewController {
         configureBackgroundView()
         configureStackView()
         configureItems()
-        configureButton()
         layoutUI()
     }
     
@@ -60,17 +55,8 @@ class NAAddNoteVC: UIViewController {
         noteItemViewTwo.textView.text = "Enter your note"
     }
     
-    private func configureButton() {
-        addNoteButton.addTarget(self, action: #selector(addNoteButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func addNoteButtonTapped() {
-        delegate.didTapAddNoteButton()
-    }
-    
     private func layoutUI() {
         view.addSubview(stackView)
-        view.addSubview(addNoteButton)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -79,11 +65,6 @@ class NAAddNoteVC: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            addNoteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            addNoteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addNoteButton.widthAnchor.constraint(equalToConstant: 200),
-            addNoteButton.heightAnchor.constraint(equalToConstant: 48),
         ])
     }
 }
