@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileVC: UIViewController {
+class ProfileVC: NADataLoadingVC {
     
     let headerView = UIView()
     let userInfoUpdateView = UIView()
@@ -84,6 +84,8 @@ class ProfileVC: UIViewController {
     }
     
     func getUserData() {
+        showLoadingView()
+        
         let getMeModel = GetMeModel()
         
         APIManager.sharedInstance.callingGetMeAPI(getMeModel: getMeModel) { [weak self] isSuccess in
@@ -94,10 +96,6 @@ class ProfileVC: UIViewController {
                 let data = APIManager.sharedInstance.getMeResponse?.data
                 let message = APIManager.sharedInstance.getMeResponse?.message
                 
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
-                
                 if code == "common.success" {
                     profileHeaderVC.nameLabel.text = data?.name
                     profileHeaderVC.emailLabel.text = data?.email
@@ -107,8 +105,11 @@ class ProfileVC: UIViewController {
                 } else {
                     print("alert")
                 }
+                
+                dismissLoadingView()
             } else {
                 print("failure")
+                dismissLoadingView()
             }
         }
     }
@@ -116,6 +117,8 @@ class ProfileVC: UIViewController {
 
 extension ProfileVC: NAUserInfoUpdateVCDelegate {
     func didTapInfoSaveButton() {
+        showLoadingView()
+        
         guard let name = userInfoUpdateVC.inputViewOne.textField.text,
               let email = userInfoUpdateVC.inputViewTwo.textField.text else { return }
         
@@ -128,16 +131,18 @@ extension ProfileVC: NAUserInfoUpdateVCDelegate {
                 let code = APIManager.sharedInstance.userUpdateMeResponse?.code
                 let message = APIManager.sharedInstance.userUpdateMeResponse?.message
                 
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
-                
                 if code == "common.success" {
+                    dismissLoadingView()
+                    
                     print("information updated")
                 } else {
+                    dismissLoadingView()
+                    
                     print("alert")
                 }
             } else {
+                dismissLoadingView()
+                
                 print("failure")
             }
         }
@@ -146,6 +151,8 @@ extension ProfileVC: NAUserInfoUpdateVCDelegate {
 
 extension ProfileVC: NAUserPasswordUpdateVCDelegate {
     func didTapPasswordSaveButton() {
+        showLoadingView()
+        
         guard let password = userPasswordUpdateVC.inputViewOne.textField.text,
               let newPassword = userPasswordUpdateVC.inputViewTwo.textField.text,
               let confirmPassword = userPasswordUpdateVC.inputViewThree.textField.text else { return }
@@ -159,16 +166,18 @@ extension ProfileVC: NAUserPasswordUpdateVCDelegate {
                 let code = APIManager.sharedInstance.updateMyPasswordResponse?.code
                 let message = APIManager.sharedInstance.updateMyPasswordResponse?.message
                 
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
-                
                 if code == "user.change-password" {
+                    dismissLoadingView()
+                    
                     print("password updated")
                 } else {
+                    dismissLoadingView()
+                    
                     print("alert")
                 }
             } else {
+                dismissLoadingView()
+                
                 print("failure")
             }
         }

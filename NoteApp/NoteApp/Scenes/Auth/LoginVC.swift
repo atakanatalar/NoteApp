@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginVC: UIViewController {
+class LoginVC: NADataLoadingVC {
 
     let headerView = UIView()
     let loginInputView = UIView()
@@ -86,6 +86,8 @@ extension LoginVC: NALoginInputVCDelegate {
     }
     
     func didTapSignInButton() {
+        showLoadingView()
+        
         guard let email = loginInputVC.inputViewOne.textField.text,
               let password = loginInputVC.inputViewTwo.textField.text else { return }
         
@@ -98,17 +100,19 @@ extension LoginVC: NALoginInputVCDelegate {
                 let code = APIManager.sharedInstance.loginResponse?.code
                 let message = APIManager.sharedInstance.loginResponse?.message
                 
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
-                
                 if code == "common.success" {
+                    dismissLoadingView()
+                    
                     let notesVC = NotesVC()
                     navigationController?.pushViewController(notesVC, animated: true)
                 } else {
+                    dismissLoadingView()
+                    
                     print("alert")
                 }
             } else {
+                dismissLoadingView()
+                
                 print("failure")
             }
         }

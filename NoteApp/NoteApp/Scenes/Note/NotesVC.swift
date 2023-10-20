@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotesVC: UIViewController {
+class NotesVC: NADataLoadingVC {
     
     let tableView = UITableView()
     
@@ -69,16 +69,22 @@ class NotesVC: UIViewController {
     }
     
     func getNotes() {
+        showLoadingView()
+        
         let getMyNotesModel = GetMyNotesModel()
+        
         APIManager.sharedInstance.callingGetMyNotesAPI(getMyNotesModel: getMyNotesModel) { [weak self] isSuccess in
             guard let self = self else { return }
             
             if isSuccess {
                 data = (APIManager.sharedInstance.getMyNotesModelResponse?.data.data)!
                 toolbarTitleLabel.text = "\(data.count) Notes"
-                print("data: \(data)")
                 updateUI(with: data)
+                
+                dismissLoadingView()
             } else {
+                dismissLoadingView()
+                
                 print("failure")
             }
         }
@@ -136,6 +142,8 @@ extension NotesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showLoadingView()
+        
         let activeArray = isSearching ? filteredData : data
         let data = activeArray[indexPath.row]
         
@@ -148,17 +156,19 @@ extension NotesVC: UITableViewDelegate, UITableViewDataSource {
                 let data = APIManager.sharedInstance.getNoteResponse?.data
                 let message = APIManager.sharedInstance.getNoteResponse?.message
                 
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
-                
                 if code == "common.success" {
+                    dismissLoadingView()
+                    
                     let destinationVC = NoteVC(data: data!)
                     navigationController?.pushViewController(destinationVC, animated: true)
                 } else {
+                    dismissLoadingView()
+                    
                     print("alert")
                 }
             } else {
+                dismissLoadingView()
+                
                 print("failure")
             }
         }
@@ -175,10 +185,6 @@ extension NotesVC: UITableViewDelegate, UITableViewDataSource {
             if isSuccess {
                 let code = APIManager.sharedInstance.deleteNoteResponse?.code
                 let message = APIManager.sharedInstance.deleteNoteResponse?.message
-                
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
                 
                 if code == "common.delete" {
                     self.data.remove(at: indexPath.row)

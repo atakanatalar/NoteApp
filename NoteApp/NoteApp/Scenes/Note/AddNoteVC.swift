@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddNoteVC: UIViewController {
+class AddNoteVC: NADataLoadingVC {
     
     let noteView = UIView()
     
@@ -76,6 +76,8 @@ class AddNoteVC: UIViewController {
     }
     
     @objc func addNoteButton() {
+        showLoadingView()
+        
         guard let title = addNoteVC.noteItemViewOne.textView.text,
               let note = addNoteVC.noteItemViewTwo.textView.text else { return }
         
@@ -88,16 +90,18 @@ class AddNoteVC: UIViewController {
                 let code = APIManager.sharedInstance.createNoteResponse?.code
                 let message = APIManager.sharedInstance.createNoteResponse?.message
                 
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
-                
                 if code == "common.success" {
+                    dismissLoadingView()
+                    
                     navigationController?.popViewController(animated: true)
                 } else {
+                    dismissLoadingView()
+                    
                     print("alert")
                 }
             } else {
+                dismissLoadingView()
+                
                 print("failure")
             }
         }

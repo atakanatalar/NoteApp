@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NoteVC: UIViewController {
+class NoteVC: NADataLoadingVC {
     
     let noteView = UIView()
     
@@ -83,6 +83,8 @@ class NoteVC: UIViewController {
     }
     
     @objc func saveNoteButton() {
+        showLoadingView()
+        
         guard let title = noteVC.noteItemViewOne.textView.text,
               let note = noteVC.noteItemViewTwo.textView.text else { return }
         
@@ -95,16 +97,18 @@ class NoteVC: UIViewController {
                 let code = APIManager.sharedInstance.updateNoteResponse?.code
                 let message = APIManager.sharedInstance.updateNoteResponse?.message
                 
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
-                
                 if code == "common.success" {
+                    dismissLoadingView()
+                    
                     print("updated")
                 } else {
+                    dismissLoadingView()
+                    
                     print("alert")
                 }
             } else {
+                dismissLoadingView()
+                
                 print("failure")
             }
         }

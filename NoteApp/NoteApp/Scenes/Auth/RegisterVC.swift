@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegisterVC: UIViewController {
+class RegisterVC: NADataLoadingVC {
     
     let headerView = UIView()
     let registerInputView = UIView()
@@ -81,6 +81,8 @@ class RegisterVC: UIViewController {
 extension RegisterVC: NARegisterInputVCDelegate {
     
     func didTapSignUpButton() {
+        showLoadingView()
+        
         guard let name = registerInputVC.inputViewOne.textField.text,
               let email = registerInputVC.inputViewTwo.textField.text,
               let password = registerInputVC.inputViewThree.textField.text else { return }
@@ -94,17 +96,19 @@ extension RegisterVC: NARegisterInputVCDelegate {
                 let code = APIManager.sharedInstance.registerResponse?.code
                 let message = APIManager.sharedInstance.registerResponse?.message
                 
-                if let message = message, let code = code {
-                    print("code: \(code), message: \(message)")
-                }
-                
                 if code == "common.success" {
+                    dismissLoadingView()
+                    
                     let notesVC = NotesVC()
                     navigationController?.pushViewController(notesVC, animated: true)
                 } else {
+                    dismissLoadingView()
+                    
                     print("alert")
                 }
             } else {
+                dismissLoadingView()
+                
                 print("failure")
             }
         }
