@@ -84,15 +84,17 @@ class NotesVC: NADataLoadingVC {
                 dismissLoadingView()
             } else {
                 dismissLoadingView()
-                
-                print("failure")
+                //Although the request was successful, I could not understand how it entered here. That's why I covered the events here too.
+                let message = "There are no notes here. Let's add a note 🥲."
+                showEmptyStateView(with: message, in: self.view)
             }
         }
     }
     
     func updateUI(with data: [Datum]) {
         if self.data.isEmpty {
-            print("data empty")
+            let message = "There are no notes here. Let's add a note 🥲."
+            showEmptyStateView(with: message, in: self.view)
         } else {
             self.data = data
             
