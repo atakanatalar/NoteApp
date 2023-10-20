@@ -114,6 +114,40 @@ class NotesVC: NADataLoadingVC {
         let destinationVC = ProfileVC()
         navigationController?.pushViewController(destinationVC, animated: true)
     }
+    
+    @objc func makeDeleteAlert(title: String, message: String, index: IndexPath) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel)
+        
+        let deleteButton = UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive) { (UIAlertAction) in
+            let deleteNoteModel = DeleteNoteModel()
+            
+            APIManager.sharedInstance.callingDeleteNoteAPI(noteId: self.data[index.row].id, deleteNoteModel: deleteNoteModel) { [weak self] isSuccess in
+                guard let self = self else { return }
+            
+                if isSuccess {
+                    let code = APIManager.sharedInstance.deleteNoteResponse?.code
+                    let message = APIManager.sharedInstance.deleteNoteResponse?.message
+            
+                    if code == "common.delete" {
+                        self.data.remove(at: index.row)
+                        tableView.deleteRows(at: [index], with: .left)
+                        getNotes()
+                    } else {
+                        print("alert")
+                    }
+                } else {
+                    print("failure")
+                }
+            }
+        }
+        
+        alert.addAction(cancelButton)
+        alert.addAction(deleteButton)
+        
+        present(alert, animated: true)
+    }
 }
 
 extension NotesVC: UISearchResultsUpdating {
@@ -178,26 +212,7 @@ extension NotesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-    
-        let deleteNoteModel = DeleteNoteModel()
         
-        APIManager.sharedInstance.callingDeleteNoteAPI(noteId: data[indexPath.row].id, deleteNoteModel: deleteNoteModel) { [weak self] isSuccess in
-            guard let self = self else { return }
-            
-            if isSuccess {
-                let code = APIManager.sharedInstance.deleteNoteResponse?.code
-                let message = APIManager.sharedInstance.deleteNoteResponse?.message
-                
-                if code == "common.delete" {
-                    self.data.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .left)
-                    getNotes()
-                } else {
-                    print("alert")
-                }
-            } else {
-                print("failure")
-            }
-        }
+        makeDeleteAlert(title: "Delete Note", message: "Are you sure you want to delete this note.", index: indexPath)
     }
 }

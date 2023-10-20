@@ -195,6 +195,7 @@
 		0C2B22D22AD7452E003CA111 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				0C84693A2AE2DA870040B9DD /* Extensions */,
 				0C2B22D52AD80521003CA111 /* CustomViews */,
 				0C2B22D32AD7453E003CA111 /* Resources */,
 			);
@@ -384,6 +385,13 @@
 				0C8469242AE148580040B9DD /* ProfileVC.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		0C84693A2AE2DA870040B9DD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0CEC6CA32ADC9C8E00F060C1 /* TextViews */ = {
