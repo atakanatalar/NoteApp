@@ -97,19 +97,20 @@ class ProfileVC: NADataLoadingVC {
                 let message = APIManager.sharedInstance.getMeResponse?.message
                 
                 if code == "common.success" {
+                    dismissLoadingView()
+                    
                     profileHeaderVC.nameLabel.text = data?.name
                     profileHeaderVC.emailLabel.text = data?.email
                     
                     userInfoUpdateVC.inputViewOne.textField.placeholder = data?.name
                     userInfoUpdateVC.inputViewTwo.textField.placeholder = data?.email
                 } else {
-                    print("alert")
+                    dismissLoadingView()
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                 }
-                
-                dismissLoadingView()
             } else {
-                print("failure")
                 dismissLoadingView()
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
     }
@@ -133,17 +134,14 @@ extension ProfileVC: NAUserInfoUpdateVCDelegate {
                 
                 if code == "common.success" {
                     dismissLoadingView()
-                    
-                    print("information updated")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success.")
                 } else {
                     dismissLoadingView()
-                    
-                    print("alert")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                 }
             } else {
                 dismissLoadingView()
-                
-                print("failure")
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
     }
@@ -168,17 +166,14 @@ extension ProfileVC: NAUserPasswordUpdateVCDelegate {
                 
                 if code == "user.change-password" {
                     dismissLoadingView()
-                    
-                    print("password updated")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success.")
                 } else {
                     dismissLoadingView()
-                    
-                    print("alert")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                 }
             } else {
                 dismissLoadingView()
-                
-                print("failure")
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
         

@@ -94,16 +94,17 @@ extension ForgotPasswordVC: NAForgotPasswordInputVCDelegate {
                 if code == "auth.forgot-password" {
                     dismissLoadingView()
                     
-                    print("success")
+                    let destinationVC = LoginVC()
+                    navigationController?.pushViewController(destinationVC, animated: true)
+                    
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "We have send password reset instructions to you email address.")
                 } else {
                     dismissLoadingView()
-                    
-                    print("alert")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                 }
             } else {
                 dismissLoadingView()
-                
-                print("failure")
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
     }

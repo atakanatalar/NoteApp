@@ -10,5 +10,6 @@ target 'NoteApp' do
 pod 'KeychainAccess'
 pod 'Alamofire'
 pod 'CocoaDebug', :configurations => ['Debug']
+pod "ToastViewSwift"
 
 end

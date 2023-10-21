@@ -81,8 +81,8 @@ class LoginVC: NADataLoadingVC {
 extension LoginVC: NALoginInputVCDelegate {
     
     func didTapForgotPasswordButton() {
-        let forgotPasswordVC = ForgotPasswordVC()
-        navigationController?.pushViewController(forgotPasswordVC, animated: true)
+        let destinationVC = ForgotPasswordVC()
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     func didTapSignInButton() {
@@ -103,24 +103,22 @@ extension LoginVC: NALoginInputVCDelegate {
                 if code == "common.success" {
                     dismissLoadingView()
                     
-                    let notesVC = NotesVC()
-                    navigationController?.pushViewController(notesVC, animated: true)
+                    let destinationVC = NotesVC()
+                    navigationController?.pushViewController(destinationVC, animated: true)
                 } else {
                     dismissLoadingView()
-                    
-                    print("alert")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                 }
             } else {
                 dismissLoadingView()
-                
-                print("failure")
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
     }
     
     func didTapDescriptionButtonTapped() {
-        let registerVC = RegisterVC()
-        navigationController?.pushViewController(registerVC, animated: true)
+        let destinationVC = RegisterVC()
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 

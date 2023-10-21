@@ -50,6 +50,7 @@
 		0C84692F2AE1BF150040B9DD /* UpdateMyPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84692E2AE1BF150040B9DD /* UpdateMyPasswordModel.swift */; };
 		0C8469332AE29CE90040B9DD /* NADataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8469322AE29CE90040B9DD /* NADataLoadingVC.swift */; };
 		0C8469352AE2AC3E0040B9DD /* NAEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8469342AE2AC3E0040B9DD /* NAEmptyStateView.swift */; };
+		0C94B5FB2AE338C600F022C8 /* ToastMessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B5FA2AE338C600F022C8 /* ToastMessageHelper.swift */; };
 		0CEC6CA52ADC9D2D00F060C1 /* NANoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */; };
 		0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */; };
 		0CEC6CA92ADC9E7900F060C1 /* NANoteItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */; };
@@ -102,6 +103,7 @@
 		0C84692E2AE1BF150040B9DD /* UpdateMyPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMyPasswordModel.swift; sourceTree = "<group>"; };
 		0C8469322AE29CE90040B9DD /* NADataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NADataLoadingVC.swift; sourceTree = "<group>"; };
 		0C8469342AE2AC3E0040B9DD /* NAEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAEmptyStateView.swift; sourceTree = "<group>"; };
+		0C94B5FA2AE338C600F022C8 /* ToastMessageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageHelper.swift; sourceTree = "<group>"; };
 		0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteVC.swift; sourceTree = "<group>"; };
 		0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NATextView.swift; sourceTree = "<group>"; };
 		0CEC6CA82ADC9E7900F060C1 /* NANoteItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteItemView.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2B22FF2AD81D54003CA111 /* KeyboardHelper.swift */,
+				0C94B5FA2AE338C600F022C8 /* ToastMessageHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				0C2B22B72AD742FF003CA111 /* AppDelegate.swift in Sources */,
 				0C2B22E52AD806F6003CA111 /* NABodyLabel.swift in Sources */,
 				0C84691F2AE146180040B9DD /* NAProfileHeaderVC.swift in Sources */,
+				0C94B5FB2AE338C600F022C8 /* ToastMessageHelper.swift in Sources */,
 				0C2B231F2AD94355003CA111 /* GetMyNotesModel.swift in Sources */,
 				0C2B22EB2AD80BFE003CA111 /* NAAuthItemView.swift in Sources */,
 				0C2B22EE2AD80CFA003CA111 /* NAAuthHeaderVC.swift in Sources */,

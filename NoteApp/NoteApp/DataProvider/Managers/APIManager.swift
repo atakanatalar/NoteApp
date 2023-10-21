@@ -199,7 +199,6 @@ class APIManager {
                 let response = CreateNoteResponse.self
                 
                 if let createNoteResponse = try? JSONDecoder().decode(response, from: data) {
-                    print(createNoteResponse.data)
                     self.createNoteResponse = createNoteResponse
                     completionHandler(true)
                 } else {

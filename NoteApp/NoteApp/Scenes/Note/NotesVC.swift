@@ -134,11 +134,12 @@ class NotesVC: NADataLoadingVC {
                         self.data.remove(at: index.row)
                         tableView.deleteRows(at: [index], with: .left)
                         getNotes()
+                        ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Resource has been deleted.")
                     } else {
-                        print("alert")
+                        ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                     }
                 } else {
-                    print("failure")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
                 }
             }
         }
@@ -199,13 +200,11 @@ extension NotesVC: UITableViewDelegate, UITableViewDataSource {
                     navigationController?.pushViewController(destinationVC, animated: true)
                 } else {
                     dismissLoadingView()
-                    
-                    print("alert")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Not found.")
                 }
             } else {
                 dismissLoadingView()
-                
-                print("failure")
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Not found.")
             }
         }
     }

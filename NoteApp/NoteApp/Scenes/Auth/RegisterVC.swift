@@ -99,23 +99,23 @@ extension RegisterVC: NARegisterInputVCDelegate {
                 if code == "common.success" {
                     dismissLoadingView()
                     
-                    let notesVC = NotesVC()
-                    navigationController?.pushViewController(notesVC, animated: true)
+                    let destinationVC = NotesVC()
+                    navigationController?.pushViewController(destinationVC, animated: true)
+                    
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Welcome my friend 🥳.")
                 } else {
                     dismissLoadingView()
-                    
-                    print("alert")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                 }
             } else {
                 dismissLoadingView()
-                
-                print("failure")
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
     }
     
     func didTapDescriptionButton() {
-        let loginVC = LoginVC()
-        navigationController?.pushViewController(loginVC, animated: true)
+        let destinationVC = LoginVC()
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
 }

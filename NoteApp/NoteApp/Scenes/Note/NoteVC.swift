@@ -99,17 +99,14 @@ class NoteVC: NADataLoadingVC {
                 
                 if code == "common.success" {
                     dismissLoadingView()
-                    
-                    print("updated")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success")
                 } else {
                     dismissLoadingView()
-                    
-                    print("alert")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                 }
             } else {
                 dismissLoadingView()
-                
-                print("failure")
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
     }
