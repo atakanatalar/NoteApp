@@ -31,7 +31,7 @@ class NotesVC: NADataLoadingVC {
     }
     
     func configureViewController() {
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .systemBackground
         
         title = "Notes"
         navigationController?.setNavigationBarHidden(false, animated: true)

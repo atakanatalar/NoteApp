@@ -102,6 +102,7 @@ extension RegisterVC: NARegisterInputVCDelegate {
                     let destinationVC = NotesVC()
                     navigationController?.pushViewController(destinationVC, animated: true)
                     
+                    setRootVC(destinationVC: destinationVC)
                     ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Welcome my friend 🥳.")
                 } else {
                     dismissLoadingView()
@@ -117,5 +118,19 @@ extension RegisterVC: NARegisterInputVCDelegate {
     func didTapDescriptionButton() {
         let destinationVC = LoginVC()
         navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
+    func setRootVC(destinationVC: UIViewController) {
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        
+        let navController: UINavigationController?
+        
+        navController = UINavigationController(rootViewController: destinationVC)
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+              let window = appDelegate.window else { return }
+        
+        window.rootViewController = navController
+        window.makeKeyAndVisible()
     }
 }

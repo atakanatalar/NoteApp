@@ -28,13 +28,19 @@ class ProfileVC: NADataLoadingVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        configureViewController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = .systemPurple
+        
+        let signOutButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(signOutButtonTapped))
+        navigationItem.rightBarButtonItem = signOutButton
     }
     
     func configureUIElements() {
@@ -113,6 +119,13 @@ class ProfileVC: NADataLoadingVC {
                 ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
+    }
+    
+    @objc func signOutButtonTapped() {
+        let destinationVC = LoginVC()
+        navigationController?.pushViewController(destinationVC, animated: true)
+        
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
 }
 

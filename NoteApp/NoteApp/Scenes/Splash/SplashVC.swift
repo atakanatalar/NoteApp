@@ -16,13 +16,16 @@ class SplashVC: UIViewController {
 
         view.backgroundColor = .systemMint
         
-        let viewController = RegisterVC()
-        self.navController = UINavigationController(rootViewController: viewController)
-
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-              let window = appDelegate.window else {
-            return
+        if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+            let viewController = NotesVC()
+            self.navController = UINavigationController(rootViewController: viewController)
+        } else {
+            let viewController = LoginVC()
+            self.navController = UINavigationController(rootViewController: viewController)
         }
+    
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+              let window = appDelegate.window else { return }
         
         window.rootViewController = self.navController
         window.makeKeyAndVisible()

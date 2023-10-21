@@ -105,6 +105,8 @@ extension LoginVC: NALoginInputVCDelegate {
                     
                     let destinationVC = NotesVC()
                     navigationController?.pushViewController(destinationVC, animated: true)
+                    
+                    setRootVC(destinationVC: destinationVC)
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
@@ -119,6 +121,20 @@ extension LoginVC: NALoginInputVCDelegate {
     func didTapDescriptionButtonTapped() {
         let destinationVC = RegisterVC()
         navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
+    func setRootVC(destinationVC: UIViewController) {
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        
+        let navController: UINavigationController?
+        
+        navController = UINavigationController(rootViewController: destinationVC)
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+              let window = appDelegate.window else { return }
+        
+        window.rootViewController = navController
+        window.makeKeyAndVisible()
     }
 }
 
