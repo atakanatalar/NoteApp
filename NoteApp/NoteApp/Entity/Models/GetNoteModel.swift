@@ -17,7 +17,7 @@ struct GetNoteResponse: Codable {
     let message: String
 }
 
-struct GetNoteDataClass: Codable {
+struct GetNoteDataClass: Codable, Hashable {
     let title, note: String
     let id: Int
 

@@ -15,6 +15,9 @@ class NoteVC: NADataLoadingVC {
     
     var data: GetNoteDataClass!
     
+    var favoriteNotes: [GetNoteDataClass]!
+    var isFavoriteNote: Bool!
+    
     init(data: GetNoteDataClass) {
         super.init(nibName: nil, bundle: nil)
         
@@ -28,7 +31,6 @@ class NoteVC: NADataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureViewController()
         configureUIElements()
         layoutUI()
         KeyboardHelper.createDismissKeyboardTapGesture(view: view)
@@ -36,19 +38,26 @@ class NoteVC: NADataLoadingVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        configureViewController()
+        favoriteNoteCheck()
+    }
+    
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = false
         
         navigationController?.setToolbarHidden(false, animated: true)
         navigationController?.toolbar.tintColor = .systemPurple
         
+        let favoriteNoteButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(favoriteNoteButtonTapped))
+        navigationItem.rightBarButtonItem = favoriteNoteButton
+        
         let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let saveNoteButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(saveNoteButton))
         setToolbarItems([spaceItem, saveNoteButton, spaceItem], animated: true)
-    }
-    
-    func configureViewController() {
-        view.backgroundColor = .systemBackground
     }
     
     func configureUIElements() {
@@ -80,6 +89,66 @@ class NoteVC: NADataLoadingVC {
         containerView.addSubview(childVC.view)
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
+    }
+    
+    func favoriteNoteCheck() {
+        PersistenceManager.retrieveFavorites { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let favoriteNotes):
+                self.favoriteNotes = favoriteNotes
+                
+                for noteData in favoriteNotes {
+                    if noteData.id == data.id {
+                        isFavoriteNote = true
+                        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+                    } else {
+                        isFavoriteNote = false
+                        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+                    }
+                }
+            case .failure(let error):
+                print(error.rawValue)
+            }
+            
+            if self.favoriteNotes.isEmpty {
+                isFavoriteNote = false
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+            }
+        }
+    }
+    
+    @objc func favoriteNoteButtonTapped() {
+        if isFavoriteNote {
+            let favoriteNote = GetNoteDataClass(title: data.title, note: data.note, id: data.id)
+            
+            PersistenceManager.updateWith(favoriteNote: favoriteNote, actionType: .remove) { [weak self] error in
+                guard let self = self else { return }
+                
+                guard let error = error else {
+                    navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "You have successfully removed this note 🫡.")
+                    isFavoriteNote = false
+                    return
+                }
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
+            }
+        } else {
+            let favoriteNote = GetNoteDataClass(title: data.title, note: data.note, id: data.id)
+            
+            PersistenceManager.updateWith(favoriteNote: favoriteNote, actionType: .add) { [weak self] error in
+                guard let self = self else { return }
+                
+                guard let error = error else {
+                    navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "You have successfully favorited this note 🎉.")
+                    isFavoriteNote = true
+                    return
+                }
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
+            }
+        }
     }
     
     @objc func saveNoteButton() {

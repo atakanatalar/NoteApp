@@ -1,0 +1,67 @@
+//
+//  PersistenceManager.swift
+//  NoteApp
+//
+//  Created by Atakan Atalar on 22.10.2023.
+//
+
+import Foundation
+
+enum PersistenceActionType {
+    case add, remove
+}
+
+enum PersistenceManager {
+    static private let defaults = UserDefaults.standard
+    
+    enum Keys {
+        static let favoriteNotes = "favoriteNotes"
+    }
+    
+    static func updateWith(favoriteNote: GetNoteDataClass, actionType: PersistenceActionType, completed: @escaping (NAError?) -> Void) {
+        retrieveFavorites { result in
+            switch result {
+            case .success(var favoriteNotes):
+                switch actionType {
+                case .add:
+                    guard !favoriteNotes.contains(favoriteNote) else {
+                        completed(.alreadyInFavorites)
+                        return
+                    }
+                    favoriteNotes.append(favoriteNote)
+                case .remove:
+                    favoriteNotes.removeAll { $0.id == favoriteNote.id }
+                }
+                completed(save(favoriteNotes: favoriteNotes))
+            case .failure(let error):
+                completed(error)
+            }
+        }
+    }
+    
+    static func retrieveFavorites(completed: @escaping (Result<[GetNoteDataClass], NAError>) -> Void) {
+        guard let favoriteNotesData = defaults.object(forKey: Keys.favoriteNotes) as? Data else {
+            completed(.success([]))
+            return
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            let favoriteNotes = try decoder.decode([GetNoteDataClass].self, from: favoriteNotesData)
+            completed(.success(favoriteNotes))
+        } catch {
+            completed(.failure(.unableToFavorite))
+        }
+    }
+    
+    static func save(favoriteNotes: [GetNoteDataClass]) -> NAError? {
+        do {
+            let encoder = JSONEncoder()
+            let encodedFavoriteNotes = try encoder.encode(favoriteNotes)
+            defaults.set(encodedFavoriteNotes, forKey: Keys.favoriteNotes)
+            return nil
+        } catch {
+            return .unableToFavorite
+        }
+    }
+}

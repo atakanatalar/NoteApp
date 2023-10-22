@@ -24,7 +24,12 @@ class NANotesListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(data: Datum) {
+    func setNotes(data: Datum) {
+        noteTitleLabel.text = data.title
+        noteTextLabel.text = data.note
+    }
+    
+    func setFavoriteNotes(data: GetNoteDataClass) {
         noteTitleLabel.text = data.title
         noteTextLabel.text = data.note
     }

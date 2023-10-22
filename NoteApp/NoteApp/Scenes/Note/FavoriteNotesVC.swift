@@ -1,26 +1,24 @@
 //
-//  NotesVC.swift
+//  FavoriteNotesVC.swift
 //  NoteApp
 //
-//  Created by Atakan Atalar on 12.10.2023.
+//  Created by Atakan Atalar on 22.10.2023.
 //
 
 import UIKit
 
-class NotesVC: NADataLoadingVC {
+class FavoriteNotesVC: NADataLoadingVC {
     
     let tableView = UITableView()
     
-    let toolbarTitleLabel = NABodyLabel(textAlignment: .center)
-    
-    var data: [Datum] = []
-    var filteredData: [Datum] = []
+    var data: [GetNoteDataClass] = []
+    var filteredData: [GetNoteDataClass] = []
     
     var isSearching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureSearchController()
         configureTableView()
     }
@@ -33,22 +31,12 @@ class NotesVC: NADataLoadingVC {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         
-        title = "Notes"
+        title = "Favorite Notes"
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .systemPurple
         
-        navigationController?.setToolbarHidden(false, animated: true)
-        navigationController?.toolbar.tintColor = .systemPurple
-        
-        let profileButton = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(profileButtonTapped))
-        navigationItem.rightBarButtonItem = profileButton
-        
-        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let favoriteNotesButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(favoriteNotesButtonTapped))
-        let createNoteButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(createNoteButtonTapped))
-        let title = UIBarButtonItem(customView: toolbarTitleLabel)
-        setToolbarItems([favoriteNotesButton, spaceItem, title, spaceItem, createNoteButton], animated: true)
+        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     func configureSearchController() {
@@ -70,54 +58,35 @@ class NotesVC: NADataLoadingVC {
     }
     
     func getNotes() {
-        showLoadingView()
-        
-        let getMyNotesModel = GetMyNotesModel()
-        
-        APIManager.sharedInstance.callingGetMyNotesAPI(getMyNotesModel: getMyNotesModel) { [weak self] isSuccess in
+        PersistenceManager.retrieveFavorites { [weak self] result in
             guard let self = self else { return }
             
-            if isSuccess {
-                data = (APIManager.sharedInstance.getMyNotesModelResponse?.data.data)!
-                toolbarTitleLabel.text = "\(data.count) Notes"
-                updateUI(with: data)
-                dismissLoadingView()
-            } else {
-                dismissLoadingView()
-                //Although the request was successful, I could not understand how it entered here. That's why I covered the events here too.
-                let message = "There are no notes here. Let's add a note 🥲."
-                showEmptyStateView(with: message, in: self.view)
+            switch result {
+            case .success(let favoriteNotes):
+                self.updateUI(with: favoriteNotes)
+            case .failure(let error):
+                print(error.rawValue)
             }
         }
     }
     
-    func updateUI(with data: [Datum]) {
+    func updateUI(with data: [GetNoteDataClass]) {
+        self.data = data
+        
         if self.data.isEmpty {
-            let message = "There are no notes here. Let's add a note 🥲."
-            showEmptyStateView(with: message, in: self.view)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
+                
+                let message = "There are no notes here. Let's add a note 🥲."
+                self.showEmptyStateView(with: message, in: self.view)
+            }
         } else {
-            self.data = data
-            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.view.bringSubviewToFront(self.tableView)
             }
         }
-    }
-    
-    @objc func favoriteNotesButtonTapped() {
-        let destinationVC = FavoriteNotesVC()
-        navigationController?.pushViewController(destinationVC, animated: true)
-    }
-    
-    @objc func createNoteButtonTapped() {
-        let destinationVC = AddNoteVC()
-        navigationController?.pushViewController(destinationVC, animated: true)
-    }
-    
-    @objc func profileButtonTapped() {
-        let destinationVC = ProfileVC()
-        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     @objc func makeDeleteAlert(title: String, message: String, index: IndexPath) {
@@ -126,26 +95,22 @@ class NotesVC: NADataLoadingVC {
         let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel)
         
         let deleteButton = UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive) { (UIAlertAction) in
-            let deleteNoteModel = DeleteNoteModel()
+            let favoriteNote = self.data[index.row]
             
-            APIManager.sharedInstance.callingDeleteNoteAPI(noteId: self.data[index.row].id, deleteNoteModel: deleteNoteModel) { [weak self] isSuccess in
+            PersistenceManager.updateWith(favoriteNote: favoriteNote, actionType: .remove) { [weak self] error in
                 guard let self = self else { return }
-            
-                if isSuccess {
-                    let code = APIManager.sharedInstance.deleteNoteResponse?.code
-                    let message = APIManager.sharedInstance.deleteNoteResponse?.message
-            
-                    if code == "common.delete" {
-                        self.data.remove(at: index.row)
-                        tableView.deleteRows(at: [index], with: .left)
-                        getNotes()
-                        ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Resource has been deleted.")
-                    } else {
-                        ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
+                guard let error = error else {
+                    self.data.remove(at: index.row)
+                    tableView.deleteRows(at: [index], with: .left)
+                    
+                    if self.data.isEmpty {
+                        let message = "There are no favorite notes here. Let's add a note 🥲."
+                        showEmptyStateView(with: message, in: self.view)
                     }
-                } else {
-                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
+                    
+                    return
                 }
+                print(error.rawValue)
             }
         }
         
@@ -156,7 +121,7 @@ class NotesVC: NADataLoadingVC {
     }
 }
 
-extension NotesVC: UISearchResultsUpdating {
+extension FavoriteNotesVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
             filteredData.removeAll()
@@ -171,7 +136,7 @@ extension NotesVC: UISearchResultsUpdating {
     }
 }
 
-extension NotesVC: UITableViewDelegate, UITableViewDataSource {
+extension FavoriteNotesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
@@ -179,7 +144,7 @@ extension NotesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NANotesListCell.reuseID) as! NANotesListCell
         let data = data[indexPath.row]
-        cell.setNotes(data: data)
+        cell.setFavoriteNotes(data: data)
         return cell
     }
     
@@ -217,6 +182,6 @@ extension NotesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
-        makeDeleteAlert(title: "Delete Note", message: "Are you sure you want to delete this note.", index: indexPath)
+        makeDeleteAlert(title: "Delete Note", message: "Are you sure you want to delete this note from favorite notes?", index: indexPath)
     }
 }

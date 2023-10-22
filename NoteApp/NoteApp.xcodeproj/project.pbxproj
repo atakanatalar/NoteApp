@@ -41,6 +41,9 @@
 		0C3601E92ADD861D00216DC5 /* NAAddNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601E82ADD861D00216DC5 /* NAAddNoteVC.swift */; };
 		0C3601EB2ADD92D300216DC5 /* UpdateNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601EA2ADD92D300216DC5 /* UpdateNoteModel.swift */; };
 		0C3601ED2ADD973600216DC5 /* CreateNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3601EC2ADD973600216DC5 /* CreateNoteModel.swift */; };
+		0C7EF4F92AE51B2D009D1DB7 /* FavoriteNotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7EF4F82AE51B2D009D1DB7 /* FavoriteNotesVC.swift */; };
+		0C7EF4FB2AE52126009D1DB7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7EF4FA2AE52126009D1DB7 /* PersistenceManager.swift */; };
+		0C7EF4FD2AE521DC009D1DB7 /* NAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7EF4FC2AE521DC009D1DB7 /* NAError.swift */; };
 		0C84691B2AE145890040B9DD /* NAUserInfoUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84691A2AE145890040B9DD /* NAUserInfoUpdateVC.swift */; };
 		0C84691F2AE146180040B9DD /* NAProfileHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84691E2AE146180040B9DD /* NAProfileHeaderVC.swift */; };
 		0C8469252AE148580040B9DD /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8469242AE148580040B9DD /* ProfileVC.swift */; };
@@ -94,6 +97,9 @@
 		0C3601E82ADD861D00216DC5 /* NAAddNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAAddNoteVC.swift; sourceTree = "<group>"; };
 		0C3601EA2ADD92D300216DC5 /* UpdateNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteModel.swift; sourceTree = "<group>"; };
 		0C3601EC2ADD973600216DC5 /* CreateNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteModel.swift; sourceTree = "<group>"; };
+		0C7EF4F82AE51B2D009D1DB7 /* FavoriteNotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNotesVC.swift; sourceTree = "<group>"; };
+		0C7EF4FA2AE52126009D1DB7 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		0C7EF4FC2AE521DC009D1DB7 /* NAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAError.swift; sourceTree = "<group>"; };
 		0C84691A2AE145890040B9DD /* NAUserInfoUpdateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAUserInfoUpdateVC.swift; sourceTree = "<group>"; };
 		0C84691E2AE146180040B9DD /* NAProfileHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAProfileHeaderVC.swift; sourceTree = "<group>"; };
 		0C8469242AE148580040B9DD /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
@@ -299,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2B22FE2AD81CEE003CA111 /* Helper */,
+				0C7EF4FC2AE521DC009D1DB7 /* NAError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -325,6 +332,7 @@
 			children = (
 				0C2B23042AD823A7003CA111 /* KeychainManager.swift */,
 				0C2B230A2AD82BC3003CA111 /* APIManager.swift */,
+				0C7EF4FA2AE52126009D1DB7 /* PersistenceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -361,6 +369,7 @@
 				0C2B230D2AD82D67003CA111 /* NotesVC.swift */,
 				0C2B23202AD982D1003CA111 /* NoteVC.swift */,
 				0C3601E62ADD85CC00216DC5 /* AddNoteVC.swift */,
+				0C7EF4F82AE51B2D009D1DB7 /* FavoriteNotesVC.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -537,6 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C2B23092AD82A9F003CA111 /* LoginModel.swift in Sources */,
+				0C7EF4FD2AE521DC009D1DB7 /* NAError.swift in Sources */,
 				0C2B23122AD838DF003CA111 /* ForgotPasswordModel.swift in Sources */,
 				0C3601E72ADD85CC00216DC5 /* AddNoteVC.swift in Sources */,
 				0C2B22B72AD742FF003CA111 /* AppDelegate.swift in Sources */,
@@ -568,6 +578,8 @@
 				0C2B22F62AD81238003CA111 /* ForgotPasswordVC.swift in Sources */,
 				0C8469332AE29CE90040B9DD /* NADataLoadingVC.swift in Sources */,
 				0C2B22F02AD810CD003CA111 /* NALoginInputVC.swift in Sources */,
+				0C7EF4F92AE51B2D009D1DB7 /* FavoriteNotesVC.swift in Sources */,
+				0C7EF4FB2AE52126009D1DB7 /* PersistenceManager.swift in Sources */,
 				0C2B23052AD823A7003CA111 /* KeychainManager.swift in Sources */,
 				0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */,
 				0C84692F2AE1BF150040B9DD /* UpdateMyPasswordModel.swift in Sources */,
