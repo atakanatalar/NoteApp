@@ -169,6 +169,14 @@ class NoteVC: NADataLoadingVC {
                 if code == "common.success" {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success")
+                    
+                    let favoriteNote = GetNoteDataClass(title: title, note: note, id: data.id)
+                    
+                    PersistenceManager.updateWith(favoriteNote: favoriteNote, actionType: .update) { [weak self] error in
+                        guard let self = self else { return }
+                        guard let error = error else { return }
+                        ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
+                    }
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")

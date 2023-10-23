@@ -8,7 +8,7 @@
 import Foundation
 
 enum PersistenceActionType {
-    case add, remove
+    case add, remove, update
 }
 
 enum PersistenceManager {
@@ -31,6 +31,9 @@ enum PersistenceManager {
                     favoriteNotes.append(favoriteNote)
                 case .remove:
                     favoriteNotes.removeAll { $0.id == favoriteNote.id }
+                case .update:
+                    favoriteNotes.removeAll { $0.id == favoriteNote.id }
+                    favoriteNotes.append(favoriteNote)
                 }
                 completed(save(favoriteNotes: favoriteNotes))
             case .failure(let error):
