@@ -66,6 +66,13 @@ class ProfileVC: NADataLoadingVC {
         userInfoUpdateVC = NAUserInfoUpdateVC(descriptionLabelText: "You can edit your user information", delegate: self)
         userPasswordUpdateVC = NAUserPasswordUpdateVC(descriptionLabelText: "You can edit your password", delegate: self)
         
+        userInfoUpdateVC.inputViewOne.textField.delegate = self
+        userInfoUpdateVC.inputViewTwo.textField.delegate = self
+        
+        userPasswordUpdateVC.inputViewOne.textField.delegate = self
+        userPasswordUpdateVC.inputViewTwo.textField.delegate = self
+        userPasswordUpdateVC.inputViewThree.textField.delegate = self
+        
         self.add(childVC: profileHeaderVC, to: self.headerView)
         self.add(childVC: userInfoUpdateVC, to: self.userInfoUpdateView)
         self.add(childVC: userPasswordUpdateVC, to: self.userPasswordUpdateView)
@@ -207,6 +214,28 @@ extension ProfileVC: NAUserPasswordUpdateVCDelegate {
                 ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
-        
+    }
+}
+
+extension ProfileVC: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.switchBasedNextTextField(textField)
+        return true
+    }
+
+    func switchBasedNextTextField(_ textField: UITextField) {
+        switch textField {
+        case userInfoUpdateVC.inputViewOne.textField:
+            userInfoUpdateVC.inputViewTwo.textField.becomeFirstResponder()
+        case userInfoUpdateVC.inputViewTwo.textField:
+            userPasswordUpdateVC.inputViewOne.textField.becomeFirstResponder()
+        case userPasswordUpdateVC.inputViewOne.textField:
+            userPasswordUpdateVC.inputViewTwo.textField.becomeFirstResponder()
+        case userPasswordUpdateVC.inputViewTwo.textField:
+            userPasswordUpdateVC.inputViewThree.textField.becomeFirstResponder()
+        default:
+            view.endEditing(true)
+        }
     }
 }

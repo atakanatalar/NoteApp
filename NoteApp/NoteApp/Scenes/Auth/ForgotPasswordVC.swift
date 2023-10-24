@@ -42,6 +42,8 @@ class ForgotPasswordVC: NADataLoadingVC {
         
         forgotPasswordInputVC = NAForgotPasswordInputVC(delegate: self)
         
+        forgotPasswordInputVC.inputViewOne.textField.delegate = self
+        
         self.add(childVC: authHeaderVC, to: self.headerView)
         self.add(childVC: forgotPasswordInputVC, to: self.forgotPasswordInputView)
     }
@@ -106,6 +108,23 @@ extension ForgotPasswordVC: NAForgotPasswordInputVCDelegate {
                 dismissLoadingView()
                 ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
+        }
+    }
+}
+
+extension ForgotPasswordVC: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.switchBasedNextTextField(textField)
+        return true
+    }
+
+    func switchBasedNextTextField(_ textField: UITextField) {
+        switch textField {
+        case forgotPasswordInputVC.inputViewOne.textField:
+            view.endEditing(true)
+        default:
+            view.endEditing(true)
         }
     }
 }

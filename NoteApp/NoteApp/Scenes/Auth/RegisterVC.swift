@@ -44,6 +44,10 @@ class RegisterVC: NADataLoadingVC {
             delegate: self
         )
         
+        registerInputVC.inputViewOne.textField.delegate = self
+        registerInputVC.inputViewTwo.textField.delegate = self
+        registerInputVC.inputViewThree.textField.delegate = self
+        
         self.add(childVC: authHeaderVC, to: self.headerView)
         self.add(childVC: registerInputVC, to: self.registerInputView)
     }
@@ -132,5 +136,24 @@ extension RegisterVC: NARegisterInputVCDelegate {
         
         window.rootViewController = navController
         window.makeKeyAndVisible()
+    }
+}
+
+extension RegisterVC: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.switchBasedNextTextField(textField)
+        return true
+    }
+
+    func switchBasedNextTextField(_ textField: UITextField) {
+        switch textField {
+        case registerInputVC.inputViewOne.textField:
+            registerInputVC.inputViewTwo.textField.becomeFirstResponder()
+        case registerInputVC.inputViewTwo.textField:
+            registerInputVC.inputViewThree.textField.becomeFirstResponder()
+        default:
+            view.endEditing(true)
+        }
     }
 }

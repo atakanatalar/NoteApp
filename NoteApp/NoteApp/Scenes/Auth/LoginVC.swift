@@ -44,6 +44,9 @@ class LoginVC: NADataLoadingVC {
             delegate: self
         )
         
+        loginInputVC.inputViewOne.textField.delegate = self
+        loginInputVC.inputViewTwo.textField.delegate = self
+        
         self.add(childVC: authHeaderVC, to: self.headerView)
         self.add(childVC: loginInputVC, to: self.loginInputView)
     }
@@ -87,6 +90,7 @@ extension LoginVC: NALoginInputVCDelegate {
     
     func didTapSignInButton() {
         showLoadingView()
+        //hide keyboard
         
         guard let email = loginInputVC.inputViewOne.textField.text,
               let password = loginInputVC.inputViewTwo.textField.text else { return }
@@ -135,6 +139,23 @@ extension LoginVC: NALoginInputVCDelegate {
         
         window.rootViewController = navController
         window.makeKeyAndVisible()
+    }
+}
+
+extension LoginVC: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.switchBasedNextTextField(textField)
+        return true
+    }
+
+    func switchBasedNextTextField(_ textField: UITextField) {
+        switch textField {
+        case loginInputVC.inputViewOne.textField:
+            loginInputVC.inputViewTwo.textField.becomeFirstResponder()
+        default:
+            view.endEditing(true)
+        }
     }
 }
 
