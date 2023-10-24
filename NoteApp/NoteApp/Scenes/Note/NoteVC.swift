@@ -47,10 +47,6 @@ class NoteVC: NADataLoadingVC {
         view.backgroundColor = .systemBackground
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = false
-        
-        navigationController?.setToolbarHidden(false, animated: true)
-        navigationController?.toolbar.tintColor = .systemPurple
         
         let favoriteNoteButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(favoriteNoteButtonTapped))
         navigationItem.rightBarButtonItem = favoriteNoteButton
@@ -170,13 +166,15 @@ class NoteVC: NADataLoadingVC {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success")
                     
-                    let favoriteNote = GetNoteDataClass(title: title, note: note, id: data.id)
-                    
-                    PersistenceManager.updateWith(favoriteNote: favoriteNote, actionType: .update) { [weak self] error in
-                        guard let self = self else { return }
-                        guard let error = error else { return }
-                        ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
-                    }
+                    if isFavoriteNote {
+                        let favoriteNote = GetNoteDataClass(title: title, note: note, id: data.id)
+                        
+                        PersistenceManager.updateWith(favoriteNote: favoriteNote, actionType: .update) { [weak self] error in
+                            guard let self = self else { return }
+                            guard let error = error else { return }
+                            ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
+                        }
+                    } else {}
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")

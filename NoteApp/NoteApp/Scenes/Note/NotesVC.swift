@@ -26,8 +26,17 @@ class NotesVC: NADataLoadingVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         configureViewController()
         getNotes()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     func configureViewController() {

@@ -24,7 +24,6 @@ class AddNoteVC: NADataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureViewController()
         configureUIElements()
         layoutUI()
         KeyboardHelper.createDismissKeyboardTapGesture(view: view)
@@ -32,19 +31,18 @@ class AddNoteVC: NADataLoadingVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = false
         
-        navigationController?.setToolbarHidden(false, animated: true)
-        navigationController?.toolbar.tintColor = .systemPurple
-        
-        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNoteButton))
-        setToolbarItems([spaceItem, addNoteButton, spaceItem], animated: true)
+        configureViewController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNoteButton))
+        setToolbarItems([spaceItem, addNoteButton, spaceItem], animated: true)
     }
     
     func configureUIElements() {

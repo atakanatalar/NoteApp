@@ -16,11 +16,15 @@ class ProfileVC: NADataLoadingVC {
     var profileHeaderVC: NAProfileHeaderVC!
     var userInfoUpdateVC: NAUserInfoUpdateVC!
     var userPasswordUpdateVC: NAUserPasswordUpdateVC!
+    
+    let scrollView = UIScrollView()
+    let contentView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureViewController()
+        configureScrollView()
         configureUIElements()
         layoutUI()
         getUserData()
@@ -28,6 +32,7 @@ class ProfileVC: NADataLoadingVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         configureViewController()
     }
@@ -36,11 +41,24 @@ class ProfileVC: NADataLoadingVC {
         view.backgroundColor = .systemBackground
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.tintColor = .systemPurple
+        
+        navigationController?.setToolbarHidden(true, animated: true)
         
         let signOutButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(signOutButtonTapped))
         navigationItem.rightBarButtonItem = signOutButton
+    }
+    
+    func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.pinToEdges(of: view)
+        contentView.pinToEdges(of: scrollView)
+        scrollView.showsVerticalScrollIndicator = false
+        
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 950),
+        ])
     }
     
     func configureUIElements() {
@@ -54,9 +72,9 @@ class ProfileVC: NADataLoadingVC {
     }
     
     func layoutUI() {
-        view.addSubview(headerView)
-        view.addSubview(userInfoUpdateView)
-        view.addSubview(userPasswordUpdateView)
+        contentView.addSubview(headerView)
+        contentView.addSubview(userInfoUpdateView)
+        contentView.addSubview(userPasswordUpdateView)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         userInfoUpdateView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +83,7 @@ class ProfileVC: NADataLoadingVC {
         let padding: CGFloat = 24
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            headerView.topAnchor.constraint(equalTo: contentView.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             headerView.heightAnchor.constraint(equalToConstant: 66),

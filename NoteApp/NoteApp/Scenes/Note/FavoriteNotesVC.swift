@@ -24,8 +24,17 @@ class FavoriteNotesVC: NADataLoadingVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         configureViewController()
         getNotes()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     func configureViewController() {
@@ -34,7 +43,6 @@ class FavoriteNotesVC: NADataLoadingVC {
         title = "Favorite Notes"
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .systemPurple
         
         navigationController?.setToolbarHidden(true, animated: true)
     }

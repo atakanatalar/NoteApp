@@ -44,6 +44,7 @@
 		0C7EF4F92AE51B2D009D1DB7 /* FavoriteNotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7EF4F82AE51B2D009D1DB7 /* FavoriteNotesVC.swift */; };
 		0C7EF4FB2AE52126009D1DB7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7EF4FA2AE52126009D1DB7 /* PersistenceManager.swift */; };
 		0C7EF4FD2AE521DC009D1DB7 /* NAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7EF4FC2AE521DC009D1DB7 /* NAError.swift */; };
+		0C7EF5012AE7CE0B009D1DB7 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7EF5002AE7CE0B009D1DB7 /* UIView+Extensions.swift */; };
 		0C84691B2AE145890040B9DD /* NAUserInfoUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84691A2AE145890040B9DD /* NAUserInfoUpdateVC.swift */; };
 		0C84691F2AE146180040B9DD /* NAProfileHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84691E2AE146180040B9DD /* NAProfileHeaderVC.swift */; };
 		0C8469252AE148580040B9DD /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8469242AE148580040B9DD /* ProfileVC.swift */; };
@@ -100,6 +101,7 @@
 		0C7EF4F82AE51B2D009D1DB7 /* FavoriteNotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNotesVC.swift; sourceTree = "<group>"; };
 		0C7EF4FA2AE52126009D1DB7 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		0C7EF4FC2AE521DC009D1DB7 /* NAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAError.swift; sourceTree = "<group>"; };
+		0C7EF5002AE7CE0B009D1DB7 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		0C84691A2AE145890040B9DD /* NAUserInfoUpdateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAUserInfoUpdateVC.swift; sourceTree = "<group>"; };
 		0C84691E2AE146180040B9DD /* NAProfileHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAProfileHeaderVC.swift; sourceTree = "<group>"; };
 		0C8469242AE148580040B9DD /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 		0C84693A2AE2DA870040B9DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0C7EF5002AE7CE0B009D1DB7 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				0C2B22FA2AD81716003CA111 /* NARegisterInputVC.swift in Sources */,
 				0C2B23252AD99FAE003CA111 /* GetNoteModel.swift in Sources */,
 				0C3601E92ADD861D00216DC5 /* NAAddNoteVC.swift in Sources */,
+				0C7EF5012AE7CE0B009D1DB7 /* UIView+Extensions.swift in Sources */,
 				0C8469252AE148580040B9DD /* ProfileVC.swift in Sources */,
 				0C2B22E12AD806D3003CA111 /* NATitleLabel.swift in Sources */,
 				0C2B22D12AD74458003CA111 /* LoginVC.swift in Sources */,
