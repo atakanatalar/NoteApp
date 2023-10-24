@@ -38,7 +38,7 @@ class NAAuthHeaderVC: UIViewController {
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 38),
             
-            secondaryTitleLabel.centerYAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            secondaryTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             secondaryTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             secondaryTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             secondaryTitleLabel.heightAnchor.constraint(equalToConstant: 20),

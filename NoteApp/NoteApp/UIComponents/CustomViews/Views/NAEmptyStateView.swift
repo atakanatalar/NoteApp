@@ -28,11 +28,11 @@ class NAEmptyStateView: UIView {
     func configureMessageLabel() {
         addSubview(messageLabel)
         
-        messageLabel.numberOfLines = 3
+        messageLabel.numberOfLines = 2
         messageLabel.textColor = .secondaryLabel
         
         NSLayoutConstraint.activate([
-            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -150),
+            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             messageLabel.heightAnchor.constraint(equalToConstant: 200),

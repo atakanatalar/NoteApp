@@ -37,7 +37,7 @@ class ForgotPasswordVC: NADataLoadingVC {
     func configureUIElements() {
         authHeaderVC = NAAuthHeaderVC(
             titleLabelText: "Forgot Password",
-            secondaryTitleLabelText: "Confirm your email and we'll send the instructions"
+            secondaryTitleLabelText: "We will send the instructions to your email"
         )
         
         forgotPasswordInputVC = NAForgotPasswordInputVC(delegate: self)
