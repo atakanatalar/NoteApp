@@ -46,7 +46,7 @@ class NANoteItemView: UIView {
             textView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         case .note:
             textView.font = UIFont.preferredFont(forTextStyle: .body)
-            textView.textColor = .secondaryLabel
+            textView.textColor = .label
             
             textView.isScrollEnabled = true
             textView.setContentHuggingPriority(.defaultLow, for: .vertical)

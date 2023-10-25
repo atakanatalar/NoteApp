@@ -59,6 +59,9 @@ class NoteVC: NADataLoadingVC {
     func configureUIElements() {
         noteVC = NANoteVC(delegate: self)
         
+        noteVC.noteItemViewOne.textView.delegate = self
+        noteVC.noteItemViewTwo.textView.delegate = self
+        
         self.add(childVC: noteVC, to: self.noteView)
         
         noteVC.noteItemViewOne.textView.text = data.title
@@ -148,10 +151,15 @@ class NoteVC: NADataLoadingVC {
     }
     
     @objc func saveNoteButton() {
-        showLoadingView()
-        
         guard let title = noteVC.noteItemViewOne.textView.text,
               let note = noteVC.noteItemViewTwo.textView.text else { return }
+        
+        if title == "Enter your note title" || note == "Enter your note" {
+            ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "The fields are required.")
+            return
+        }
+        
+        showLoadingView()
         
         let updateModel = UpdateNoteModel(title: title, note: note)
         
@@ -188,3 +196,26 @@ class NoteVC: NADataLoadingVC {
 }
 
 extension NoteVC: NANoteVCDelegate {}
+
+extension NoteVC: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .secondaryLabel {
+            textView.text = ""
+            textView.textColor = .label
+        }
+        textView.becomeFirstResponder()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            if textView == noteVC.noteItemViewOne.textView {
+                textView.text = "Enter your note title"
+            } else {
+                textView.text = "Enter your note"
+            }
+            textView.textColor = .secondaryLabel
+        }
+        textView.resignFirstResponder()
+    }
+}

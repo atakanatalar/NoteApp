@@ -52,7 +52,10 @@ class NAAddNoteVC: UIViewController {
         noteItemViewTwo.set(noteItemType: .note)
         
         noteItemViewOne.textView.text = "Enter your note title"
+        noteItemViewOne.textView.textColor = .secondaryLabel
+        
         noteItemViewTwo.textView.text = "Enter your note"
+        noteItemViewTwo.textView.textColor = .secondaryLabel
     }
     
     private func layoutUI() {

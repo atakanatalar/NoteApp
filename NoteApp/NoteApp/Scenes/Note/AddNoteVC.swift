@@ -48,6 +48,9 @@ class AddNoteVC: NADataLoadingVC {
     func configureUIElements() {
         addNoteVC = NAAddNoteVC(delegate: self)
         
+        addNoteVC.noteItemViewOne.textView.delegate = self
+        addNoteVC.noteItemViewTwo.textView.delegate = self
+        
         self.add(childVC: addNoteVC, to: self.noteView)
     }
     
@@ -74,10 +77,15 @@ class AddNoteVC: NADataLoadingVC {
     }
     
     @objc func addNoteButton() {
-        showLoadingView()
-        
         guard let title = addNoteVC.noteItemViewOne.textView.text,
               let note = addNoteVC.noteItemViewTwo.textView.text else { return }
+        
+        if title == "Enter your note title" || note == "Enter your note" {
+            ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "The fields are required.")
+            return
+        }
+        
+        showLoadingView()
         
         let createNoteModel = CreateNoteModel(title: title, note: note)
         
@@ -105,3 +113,26 @@ class AddNoteVC: NADataLoadingVC {
 }
 
 extension AddNoteVC: NAAddNoteVCDelegate {}
+
+extension AddNoteVC: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .secondaryLabel {
+            textView.text = ""
+            textView.textColor = .label
+        }
+        textView.becomeFirstResponder()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            if textView == addNoteVC.noteItemViewOne.textView {
+                textView.text = "Enter your note title"
+            } else {
+                textView.text = "Enter your note"
+            }
+            textView.textColor = .secondaryLabel
+        }
+        textView.resignFirstResponder()
+    }
+}
