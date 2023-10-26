@@ -154,7 +154,7 @@ class NoteVC: NADataLoadingVC {
         guard let title = noteVC.noteItemViewOne.textView.text,
               let note = noteVC.noteItemViewTwo.textView.text else { return }
         
-        if title == "Enter your note title" || note == "Enter your note" {
+        if noteVC.noteItemViewOne.textView.textColor == .secondaryLabel || noteVC.noteItemViewTwo.textView.textColor == .secondaryLabel {
             ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "The fields are required.")
             return
         }
