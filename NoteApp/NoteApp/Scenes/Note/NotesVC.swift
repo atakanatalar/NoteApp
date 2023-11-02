@@ -145,6 +145,7 @@ class NotesVC: NADataLoadingVC {
                     let message = APIManager.sharedInstance.deleteNoteResponse?.message
             
                     if code == "common.delete" {
+                        removeFromFavoriteNotes(index: index)
                         self.data.remove(at: index.row)
                         tableView.deleteRows(at: [index], with: .left)
                         getNotes()
@@ -162,6 +163,16 @@ class NotesVC: NADataLoadingVC {
         alert.addAction(deleteButton)
         
         present(alert, animated: true)
+    }
+    
+    func removeFromFavoriteNotes(index: IndexPath) {
+        let favoriteNote = GetNoteDataClass(title: data[index.row].title, note: data[index.row].note, id: data[index.row].id)
+        
+        PersistenceManager.updateWith(favoriteNote: favoriteNote, actionType: .remove) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else { return }
+            ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
+        }
     }
 }
 
