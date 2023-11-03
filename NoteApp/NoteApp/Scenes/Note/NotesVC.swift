@@ -23,6 +23,7 @@ class NotesVC: NADataLoadingVC {
         
         configureSearchController()
         configureTableView()
+        refreshNotes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +79,13 @@ class NotesVC: NADataLoadingVC {
         tableView.register(NANotesListCell.self, forCellReuseIdentifier: NANotesListCell.reuseID)
     }
     
-    func getNotes() {
+    private func refreshNotes(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(getNotes), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func getNotes() {
         showLoadingView()
         
         let getMyNotesModel = GetMyNotesModel()
@@ -98,6 +105,8 @@ class NotesVC: NADataLoadingVC {
                 showEmptyStateView(with: message, in: self.view)
             }
         }
+        
+        tableView.refreshControl?.endRefreshing()
     }
     
     func updateUI(with data: [Datum]) {
