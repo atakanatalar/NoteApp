@@ -178,11 +178,11 @@ extension FavoriteNotesVC: UITableViewDelegate, UITableViewDataSource {
                     navigationController?.pushViewController(destinationVC, animated: true)
                 } else {
                     dismissLoadingView()
-                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Not found.")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                 }
             } else {
                 dismissLoadingView()
-                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Not found.")
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
     }
