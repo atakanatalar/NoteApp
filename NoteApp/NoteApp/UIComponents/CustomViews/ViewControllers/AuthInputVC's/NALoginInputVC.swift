@@ -18,7 +18,7 @@ class NALoginInputVC: UIViewController {
     let inputStackView = UIStackView()
     let inputViewOne = NAAuthItemView()
     let inputViewTwo = NAAuthItemView()
-    let forgotPasswordButton = NASecondaryButton(color: .systemPurple, title: "Forgot Password?", systemImageName: "")
+    let forgotPasswordButton = NASecondaryButton(color: .systemPurple, title: "Forgot Password", systemImageName: "")
     let signInButton = NAPrimaryButton(color: .systemPurple, title: "Sign In", systemImageName: "")
     let descriptionStackView = UIStackView()
     let descriptionButton = NASecondaryButton(color: .systemPurple, title: "Sign up now", systemImageName: "")
