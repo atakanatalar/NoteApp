@@ -102,13 +102,14 @@ class NoteVC: NADataLoadingVC {
                     if noteData.id == data.id {
                         isFavoriteNote = true
                         navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+                        return
                     } else {
                         isFavoriteNote = false
                         navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
                     }
                 }
             case .failure(let error):
-                print(error.rawValue)
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
             }
             
             if self.favoriteNotes.isEmpty {
