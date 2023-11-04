@@ -12,14 +12,10 @@ class FavoriteNotesVC: NADataLoadingVC {
     let tableView = UITableView()
     
     var data: [GetNoteDataClass] = []
-    var filteredData: [GetNoteDataClass] = []
-    
-    var isSearching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureSearchController()
         configureTableView()
     }
     
@@ -44,15 +40,7 @@ class FavoriteNotesVC: NADataLoadingVC {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        navigationController?.setToolbarHidden(true, animated: true)
-    }
-    
-    func configureSearchController() {
-        let searchController = UISearchController()
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search"
-        searchController.obscuresBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController
+        navigationController?.setToolbarHidden(false, animated: true)
     }
     
     func configureTableView() {
@@ -73,7 +61,7 @@ class FavoriteNotesVC: NADataLoadingVC {
             case .success(let favoriteNotes):
                 self.updateUI(with: favoriteNotes)
             case .failure(let error):
-                print(error.rawValue)
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
             }
         }
     }
@@ -110,15 +98,15 @@ class FavoriteNotesVC: NADataLoadingVC {
                 guard let error = error else {
                     self.data.remove(at: index.row)
                     tableView.deleteRows(at: [index], with: .left)
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "You have successfully removed this note 🫡.")
                     
                     if self.data.isEmpty {
                         let message = "There are no favorite notes here. Let's add a note 🥲."
                         showEmptyStateView(with: message, in: self.view)
                     }
-                    
                     return
                 }
-                print(error.rawValue)
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
             }
         }
         
@@ -126,21 +114,6 @@ class FavoriteNotesVC: NADataLoadingVC {
         alert.addAction(deleteButton)
         
         present(alert, animated: true)
-    }
-}
-
-extension FavoriteNotesVC: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
-            filteredData.removeAll()
-            isSearching = false
-            updateUI(with: data)
-            return
-        }
-        
-        isSearching = true
-        filteredData = data.filter { $0.title.lowercased().contains(filter.lowercased()) }
-        updateUI(with: filteredData)
     }
 }
 
@@ -159,12 +132,11 @@ extension FavoriteNotesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showLoadingView()
         
-        let activeArray = isSearching ? filteredData : data
-        let data = activeArray[indexPath.row]
+        let favoriteNote = data[indexPath.row]
         
         let getNoteModel = GetNoteModel()
         
-        APIManager.sharedInstance.callingGetNoteAPI(noteId: data.id, getNoteModel: getNoteModel) { [weak self] isSuccess in
+        APIManager.sharedInstance.callingGetNoteAPI(noteId: favoriteNote.id, getNoteModel: getNoteModel) { [weak self] isSuccess in
             guard let self = self else { return }
             if isSuccess {
                 let code = APIManager.sharedInstance.getNoteResponse?.code
