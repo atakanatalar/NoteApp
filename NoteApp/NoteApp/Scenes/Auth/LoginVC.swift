@@ -90,7 +90,7 @@ extension LoginVC: NALoginInputVCDelegate {
     
     func didTapSignInButton() {
         showLoadingView()
-        //hide keyboard
+        view.endEditing(true)
         
         guard let email = loginInputVC.inputViewOne.textField.text,
               let password = loginInputVC.inputViewTwo.textField.text else { return }
@@ -111,6 +111,7 @@ extension LoginVC: NALoginInputVCDelegate {
                     navigationController?.pushViewController(destinationVC, animated: true)
                     
                     setRootVC(destinationVC: destinationVC)
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Welcome back my friend 🥳.")
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
@@ -158,4 +159,3 @@ extension LoginVC: UITextFieldDelegate {
         }
     }
 }
-
