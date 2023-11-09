@@ -32,6 +32,7 @@ class NoteVC: NADataLoadingVC {
         super.viewDidLoad()
 
         configureUIElements()
+        configureToolbar()
         layoutUI()
         KeyboardHelper.createDismissKeyboardTapGesture(view: view)
     }
@@ -66,6 +67,20 @@ class NoteVC: NADataLoadingVC {
         
         noteVC.noteItemViewOne.textView.text = data.title
         noteVC.noteItemViewTwo.textView.text = data.note
+    }
+    
+    func configureToolbar() {
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 50))
+        toolbar.sizeToFit()
+        
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeKeyboard))
+        doneButton.tintColor = .systemPurple
+        
+        toolbar.items = [spaceItem, doneButton]
+
+        noteVC.noteItemViewOne.textView.inputAccessoryView = toolbar
+        noteVC.noteItemViewTwo.textView.inputAccessoryView = toolbar
     }
     
     func layoutUI() {
@@ -193,6 +208,10 @@ class NoteVC: NADataLoadingVC {
                 ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
+    }
+    
+    @objc func closeKeyboard() {
+        view.endEditing(true)
     }
 }
 
