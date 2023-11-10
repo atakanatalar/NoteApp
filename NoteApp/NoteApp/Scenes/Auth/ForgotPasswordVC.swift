@@ -21,7 +21,6 @@ class ForgotPasswordVC: NADataLoadingVC {
         configureViewController()
         configureUIElements()
         layoutUI()
-        KeyboardHelper.createDismissKeyboardTapGesture(view: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +80,7 @@ class ForgotPasswordVC: NADataLoadingVC {
 extension ForgotPasswordVC: NAForgotPasswordInputVCDelegate {
     func didTapResetPasswordButton() {
         showLoadingView()
+        KeyboardHelper.closeKeyboard(view: view)
         
         guard let email = forgotPasswordInputVC.inputViewOne.textField.text else { return }
         
@@ -122,9 +122,9 @@ extension ForgotPasswordVC: UITextFieldDelegate {
     func switchBasedNextTextField(_ textField: UITextField) {
         switch textField {
         case forgotPasswordInputVC.inputViewOne.textField:
-            view.endEditing(true)
+            KeyboardHelper.closeKeyboard(view: view)
         default:
-            view.endEditing(true)
+            KeyboardHelper.closeKeyboard(view: view)
         }
     }
 }

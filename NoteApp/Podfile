@@ -11,5 +11,6 @@ pod 'KeychainAccess'
 pod 'Alamofire'
 pod 'CocoaDebug', :configurations => ['Debug']
 pod "ToastViewSwift"
+pod 'IQKeyboardManagerSwift', '6.5.10'
 
 end

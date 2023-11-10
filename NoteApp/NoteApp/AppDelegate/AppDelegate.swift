@@ -6,13 +6,20 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    var services: [AppDelegateServiceProtocol] = [IQKeyboardService()]
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        for service in services {
+            service.application(application, launchOptions: launchOptions)
+        }
         
         window = UIWindow(frame: UIScreen.main.bounds)
         

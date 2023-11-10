@@ -8,9 +8,7 @@
 import UIKit
 
 enum KeyboardHelper {
-    
-    static func createDismissKeyboardTapGesture(view: UIView) {
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
-        view.addGestureRecognizer(tapGesture)
+    static func closeKeyboard(view: UIView) {
+        view.endEditing(true)
     }
 }

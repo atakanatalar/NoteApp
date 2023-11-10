@@ -21,7 +21,6 @@ class LoginVC: NADataLoadingVC {
         configureViewController()
         configureUIElements()
         layoutUI()
-        KeyboardHelper.createDismissKeyboardTapGesture(view: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +89,7 @@ extension LoginVC: NALoginInputVCDelegate {
     
     func didTapSignInButton() {
         showLoadingView()
-        view.endEditing(true)
+        KeyboardHelper.closeKeyboard(view: view)
         
         guard let email = loginInputVC.inputViewOne.textField.text,
               let password = loginInputVC.inputViewTwo.textField.text else { return }
@@ -155,7 +154,7 @@ extension LoginVC: UITextFieldDelegate {
         case loginInputVC.inputViewOne.textField:
             loginInputVC.inputViewTwo.textField.becomeFirstResponder()
         default:
-            view.endEditing(true)
+            KeyboardHelper.closeKeyboard(view: view)
         }
     }
 }

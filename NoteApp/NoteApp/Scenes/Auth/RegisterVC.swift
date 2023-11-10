@@ -21,7 +21,6 @@ class RegisterVC: NADataLoadingVC {
         configureViewController()
         configureUIElements()
         layoutUI()
-        KeyboardHelper.createDismissKeyboardTapGesture(view: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +85,7 @@ extension RegisterVC: NARegisterInputVCDelegate {
     
     func didTapSignUpButton() {
         showLoadingView()
+        KeyboardHelper.closeKeyboard(view: view)
         
         guard let name = registerInputVC.inputViewOne.textField.text,
               let email = registerInputVC.inputViewTwo.textField.text,
@@ -153,7 +153,7 @@ extension RegisterVC: UITextFieldDelegate {
         case registerInputVC.inputViewTwo.textField:
             registerInputVC.inputViewThree.textField.becomeFirstResponder()
         default:
-            view.endEditing(true)
+            KeyboardHelper.closeKeyboard(view: view)
         }
     }
 }

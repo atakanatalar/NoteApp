@@ -54,6 +54,8 @@
 		0C84692F2AE1BF150040B9DD /* UpdateMyPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C84692E2AE1BF150040B9DD /* UpdateMyPasswordModel.swift */; };
 		0C8469332AE29CE90040B9DD /* NADataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8469322AE29CE90040B9DD /* NADataLoadingVC.swift */; };
 		0C8469352AE2AC3E0040B9DD /* NAEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8469342AE2AC3E0040B9DD /* NAEmptyStateView.swift */; };
+		0C8C830C2AFE3A15008697C3 /* AppDelegateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C830B2AFE3A15008697C3 /* AppDelegateService.swift */; };
+		0C8C830E2AFE3A57008697C3 /* IQKeyboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C830D2AFE3A57008697C3 /* IQKeyboardService.swift */; };
 		0C94B5FB2AE338C600F022C8 /* ToastMessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C94B5FA2AE338C600F022C8 /* ToastMessageHelper.swift */; };
 		0CEC6CA52ADC9D2D00F060C1 /* NANoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */; };
 		0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */; };
@@ -111,6 +113,8 @@
 		0C84692E2AE1BF150040B9DD /* UpdateMyPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMyPasswordModel.swift; sourceTree = "<group>"; };
 		0C8469322AE29CE90040B9DD /* NADataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NADataLoadingVC.swift; sourceTree = "<group>"; };
 		0C8469342AE2AC3E0040B9DD /* NAEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAEmptyStateView.swift; sourceTree = "<group>"; };
+		0C8C830B2AFE3A15008697C3 /* AppDelegateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateService.swift; sourceTree = "<group>"; };
+		0C8C830D2AFE3A57008697C3 /* IQKeyboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQKeyboardService.swift; sourceTree = "<group>"; };
 		0C94B5FA2AE338C600F022C8 /* ToastMessageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageHelper.swift; sourceTree = "<group>"; };
 		0CEC6CA42ADC9D2D00F060C1 /* NANoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NANoteVC.swift; sourceTree = "<group>"; };
 		0CEC6CA62ADC9DCD00F060C1 /* NATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NATextView.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 		0C2B22CA2AD74364003CA111 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				0C8C830A2AFE39FE008697C3 /* Services */,
 				0C2B22B62AD742FF003CA111 /* AppDelegate.swift */,
 			);
 			path = AppDelegate;
@@ -409,6 +414,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0C8C830A2AFE39FE008697C3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C830B2AFE3A15008697C3 /* AppDelegateService.swift */,
+				0C8C830D2AFE3A57008697C3 /* IQKeyboardService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		0CEC6CA32ADC9C8E00F060C1 /* TextViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,6 +601,7 @@
 				0C2B23052AD823A7003CA111 /* KeychainManager.swift in Sources */,
 				0CEC6CA72ADC9DCD00F060C1 /* NATextView.swift in Sources */,
 				0C84692F2AE1BF150040B9DD /* UpdateMyPasswordModel.swift in Sources */,
+				0C8C830E2AFE3A57008697C3 /* IQKeyboardService.swift in Sources */,
 				0C84691B2AE145890040B9DD /* NAUserInfoUpdateVC.swift in Sources */,
 				0C2B23232AD999C3003CA111 /* DeleteNoteModel.swift in Sources */,
 				0C2B22E92AD80AE6003CA111 /* NATextField.swift in Sources */,
@@ -594,6 +609,7 @@
 				0C2B22F82AD8126E003CA111 /* RegisterVC.swift in Sources */,
 				0C2B22DE2AD805B9003CA111 /* NASecondaryButton.swift in Sources */,
 				0C3601EB2ADD92D300216DC5 /* UpdateNoteModel.swift in Sources */,
+				0C8C830C2AFE3A15008697C3 /* AppDelegateService.swift in Sources */,
 				0C2B23172AD93596003CA111 /* NANotesListCell.swift in Sources */,
 				0C2B230E2AD82D67003CA111 /* NotesVC.swift in Sources */,
 				0C2B22E72AD8071E003CA111 /* NASecondaryTitleLabel.swift in Sources */,

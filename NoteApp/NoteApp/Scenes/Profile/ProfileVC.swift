@@ -28,7 +28,6 @@ class ProfileVC: NADataLoadingVC {
         configureUIElements()
         layoutUI()
         getUserData()
-        KeyboardHelper.createDismissKeyboardTapGesture(view: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +56,7 @@ class ProfileVC: NADataLoadingVC {
         
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 950),
+            contentView.heightAnchor.constraint(equalToConstant: 630),
         ])
     }
     
@@ -103,7 +102,7 @@ class ProfileVC: NADataLoadingVC {
             userPasswordUpdateView.topAnchor.constraint(equalTo: userInfoUpdateView.bottomAnchor, constant: padding),
             userPasswordUpdateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             userPasswordUpdateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            userPasswordUpdateView.heightAnchor.constraint(equalToConstant: 382),
+            userPasswordUpdateView.heightAnchor.constraint(equalToConstant: 282),
         ])
     }
     
@@ -157,6 +156,7 @@ class ProfileVC: NADataLoadingVC {
 extension ProfileVC: NAUserInfoUpdateVCDelegate {
     func didTapInfoSaveButton() {
         showLoadingView()
+        KeyboardHelper.closeKeyboard(view: view)
         
         guard let name = userInfoUpdateVC.inputViewOne.textField.text,
               let email = userInfoUpdateVC.inputViewTwo.textField.text else { return }
@@ -188,6 +188,7 @@ extension ProfileVC: NAUserInfoUpdateVCDelegate {
 extension ProfileVC: NAUserPasswordUpdateVCDelegate {
     func didTapPasswordSaveButton() {
         showLoadingView()
+        KeyboardHelper.closeKeyboard(view: view)
         
         guard let password = userPasswordUpdateVC.inputViewOne.textField.text,
               let newPassword = userPasswordUpdateVC.inputViewTwo.textField.text,
@@ -235,7 +236,7 @@ extension ProfileVC: UITextFieldDelegate {
         case userPasswordUpdateVC.inputViewTwo.textField:
             userPasswordUpdateVC.inputViewThree.textField.becomeFirstResponder()
         default:
-            view.endEditing(true)
+            KeyboardHelper.closeKeyboard(view: view)
         }
     }
 }
