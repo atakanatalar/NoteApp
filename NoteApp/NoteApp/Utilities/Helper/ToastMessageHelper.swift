@@ -22,7 +22,7 @@ class ToastMessageHelper {
             image = UIImage(systemName: "exclamationmark.triangle")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
         }
 
-        let config = ToastConfiguration(direction: .bottom, dismissBy: [.time(time: 4.0), .swipe(direction: .natural), .longPress], animationTime: 0.2, enteringAnimation: .default, exitingAnimation: .default)
+        let config = ToastConfiguration(direction: .bottom, dismissBy: [.time(time: 2.0), .swipe(direction: .natural), .longPress], animationTime: 0.2, enteringAnimation: .default, exitingAnimation: .default)
 
         let toast = Toast.default(
             image: image,
