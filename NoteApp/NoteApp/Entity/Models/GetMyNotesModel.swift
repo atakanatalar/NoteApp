@@ -19,16 +19,16 @@ struct GetMyNotesModelResponse: Codable {
 
 struct GetMyNotesDataClass: Codable {
     let currentPage: Int
-    let data: [Datum]
+    let data: [Datum]?
     let firstPageURL: String
-    let from, lastPage: Int
+    let from, lastPage: Int?
     let lastPageURL: String
     let links: [Link]
     let nextPageURL: GetMyNotesJSONNull?
     let path: String
     let perPage: Int
     let prevPageURL: GetMyNotesJSONNull?
-    let to, total: Int
+    let to, total: Int?
     
     enum CodingKeys: String, CodingKey {
         case currentPage = "current_page"
@@ -47,8 +47,8 @@ struct GetMyNotesDataClass: Codable {
 }
 
 struct Datum: Codable, Hashable {
-    let id: Int
-    let title, note: String
+    let id: Int?
+    let title, note: String?
 }
 
 struct Link: Codable {

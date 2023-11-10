@@ -10,6 +10,8 @@ import UIKit
 class NotesVC: NADataLoadingVC {
     
     let tableView = UITableView()
+
+    let searchController = UISearchController()
     
     let toolbarTitleLabel = NABodyLabel(textAlignment: .center)
     
@@ -31,6 +33,7 @@ class NotesVC: NADataLoadingVC {
         
         configureViewController()
         getNotes()
+        clearSearchBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,6 +41,8 @@ class NotesVC: NADataLoadingVC {
         
         navigationController?.setNavigationBarHidden(true, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = false
+        
+        clearSearchBar()
     }
     
     func configureViewController() {
@@ -62,7 +67,6 @@ class NotesVC: NADataLoadingVC {
     }
     
     func configureSearchController() {
-        let searchController = UISearchController()
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search"
         searchController.obscuresBackgroundDuringPresentation = false
@@ -94,15 +98,21 @@ class NotesVC: NADataLoadingVC {
             guard let self = self else { return }
             
             if isSuccess {
-                data = (APIManager.sharedInstance.getMyNotesModelResponse?.data.data)!
-                toolbarTitleLabel.text = "\(data.count) Notes"
-                updateUI(with: data)
-                dismissLoadingView()
+                let code = APIManager.sharedInstance.getMyNotesModelResponse?.code
+                let message = APIManager.sharedInstance.getMyNotesModelResponse?.message
+                
+                if code == "common.success" {
+                    dismissLoadingView()
+                    data = APIManager.sharedInstance.getMyNotesModelResponse?.data.data ?? []
+                    toolbarTitleLabel.text = "\(data.count) Notes"
+                    updateUI(with: data)
+                } else {
+                    dismissLoadingView()
+                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
+                }
             } else {
                 dismissLoadingView()
-                //Although the request was successful, I could not understand how it entered here. That's why I covered the events here too.
-                let message = "There are no notes here. Let's add a note 🥲."
-                showEmptyStateView(with: message, in: self.view)
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
         
@@ -114,7 +124,7 @@ class NotesVC: NADataLoadingVC {
             let message = "There are no notes here. Let's add a note 🥲."
             showEmptyStateView(with: message, in: self.view)
         } else {
-            self.data = data
+            self.filteredData = data
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -146,7 +156,7 @@ class NotesVC: NADataLoadingVC {
         let deleteButton = UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive) { (UIAlertAction) in
             let deleteNoteModel = DeleteNoteModel()
             
-            APIManager.sharedInstance.callingDeleteNoteAPI(noteId: self.data[index.row].id, deleteNoteModel: deleteNoteModel) { [weak self] isSuccess in
+            APIManager.sharedInstance.callingDeleteNoteAPI(noteId: self.filteredData[index.row].id ?? 0, deleteNoteModel: deleteNoteModel) { [weak self] isSuccess in
                 guard let self = self else { return }
             
                 if isSuccess {
@@ -155,9 +165,10 @@ class NotesVC: NADataLoadingVC {
             
                     if code == "common.delete" {
                         removeFromFavoriteNotes(index: index)
-                        self.data.remove(at: index.row)
+                        filteredData.remove(at: index.row)
                         tableView.deleteRows(at: [index], with: .left)
                         getNotes()
+                        clearSearchBar()
                         ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Resource has been deleted.")
                     } else {
                         ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
@@ -175,12 +186,20 @@ class NotesVC: NADataLoadingVC {
     }
     
     func removeFromFavoriteNotes(index: IndexPath) {
-        let favoriteNote = GetNoteDataClass(title: data[index.row].title, note: data[index.row].note, id: data[index.row].id)
+        let favoriteNote = GetNoteDataClass(title: data[index.row].title ?? "", note: data[index.row].note ?? "", id: data[index.row].id ?? 0)
         
         PersistenceManager.updateWith(favoriteNote: favoriteNote, actionType: .remove) { [weak self] error in
             guard let self = self else { return }
             guard let error = error else { return }
             ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: error.rawValue)
+        }
+    }
+    
+    func clearSearchBar() {
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            searchController.searchBar.text = .none
+            searchController.searchBar.becomeFirstResponder()
+            
         }
     }
 }
@@ -195,19 +214,19 @@ extension NotesVC: UISearchResultsUpdating {
         }
         
         isSearching = true
-        filteredData = data.filter { $0.title.lowercased().contains(filter.lowercased()) }
+        filteredData = data.filter { $0.title?.lowercased().contains(filter.lowercased()) ?? false}
         updateUI(with: filteredData)
     }
 }
 
 extension NotesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return filteredData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NANotesListCell.reuseID) as! NANotesListCell
-        let data = data[indexPath.row]
+        let data = filteredData[indexPath.row]
         cell.setNotes(data: data)
         return cell
     }
@@ -215,12 +234,9 @@ extension NotesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showLoadingView()
         
-        let activeArray = isSearching ? filteredData : data
-        let data = activeArray[indexPath.row]
-        
         let getNoteModel = GetNoteModel()
         
-        APIManager.sharedInstance.callingGetNoteAPI(noteId: data.id, getNoteModel: getNoteModel) { [weak self] isSuccess in
+        APIManager.sharedInstance.callingGetNoteAPI(noteId: filteredData[indexPath.row].id ?? 0, getNoteModel: getNoteModel) { [weak self] isSuccess in
             guard let self = self else { return }
             if isSuccess {
                 let code = APIManager.sharedInstance.getNoteResponse?.code
