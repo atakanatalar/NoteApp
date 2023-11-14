@@ -128,12 +128,8 @@ class ProfileVC: NADataLoadingVC {
                 
                 if code == "common.success" {
                     dismissLoadingView()
-                    
-                    profileHeaderVC.nameLabel.text = data?.name
-                    profileHeaderVC.emailLabel.text = data?.email
-                    
-                    userInfoUpdateVC.inputViewOne.textField.placeholder = data?.name
-                    userInfoUpdateVC.inputViewTwo.textField.placeholder = data?.email
+                    updateUserInfoHeader(nameLabelText: data?.name ?? "", emailLabelText: data?.email ?? "")
+                    updateUserInfoInputs(name: data?.name ?? "", email: data?.email ?? "")
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
@@ -143,6 +139,25 @@ class ProfileVC: NADataLoadingVC {
                 ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
             }
         }
+    }
+    
+    func updateUserInfoHeader(nameLabelText: String, emailLabelText: String) {
+        profileHeaderVC.nameLabel.text = nameLabelText
+        profileHeaderVC.emailLabel.text = emailLabelText
+    }
+    
+    func updateUserInfoInputs(name: String, email: String) {
+        userInfoUpdateVC.inputViewOne.textField.text = ""
+        userInfoUpdateVC.inputViewTwo.textField.text = ""
+        
+        userInfoUpdateVC.inputViewOne.textField.placeholder = name
+        userInfoUpdateVC.inputViewTwo.textField.placeholder = email
+    }
+    
+    func updatePasswordInputs() {
+        userPasswordUpdateVC.inputViewOne.textField.text = ""
+        userPasswordUpdateVC.inputViewTwo.textField.text = ""
+        userPasswordUpdateVC.inputViewThree.textField.text = ""
     }
     
     @objc func signOutButtonTapped() {
@@ -168,11 +183,14 @@ extension ProfileVC: NAUserInfoUpdateVCDelegate {
             guard let self = self else { return }
             
             if isSuccess {
+                let data = APIManager.sharedInstance.userUpdateMeResponse?.data
                 let code = APIManager.sharedInstance.userUpdateMeResponse?.code
                 let message = APIManager.sharedInstance.userUpdateMeResponse?.message
                 
                 if code == "common.success" {
                     dismissLoadingView()
+                    updateUserInfoHeader(nameLabelText: data?.name ?? "", emailLabelText: data?.email ?? "")
+                    updateUserInfoInputs(name: data?.name ?? "", email: data?.email ?? "")
                     ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Successfully updated your user info 🎉")
                 } else {
                     dismissLoadingView()
@@ -206,6 +224,7 @@ extension ProfileVC: NAUserPasswordUpdateVCDelegate {
                 
                 if code == "user.change-password" {
                     dismissLoadingView()
+                    updatePasswordInputs()
                     ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Successfully updated your password 🔐")
                 } else {
                     dismissLoadingView()
