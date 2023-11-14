@@ -19,6 +19,8 @@ class NoteVC: NADataLoadingVC {
     var favoriteNotes: [GetNoteDataClass]!
     var isFavoriteNote: Bool!
     
+    var favoriteNoteButton : UIBarButtonItem!
+    
     init(data: GetNoteDataClass) {
         super.init(nibName: nil, bundle: nil)
         
@@ -32,6 +34,7 @@ class NoteVC: NADataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureViewController()
         configureUIElements()
         layoutUI()
     }
@@ -39,7 +42,7 @@ class NoteVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureViewController()
+        configureAppearNavigationController()
         favoriteNoteCheck()
         IQKeyboardManager.shared.enable = false
     }
@@ -52,15 +55,15 @@ class NoteVC: NADataLoadingVC {
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        
+    }
+    
+    func configureAppearNavigationController() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        let favoriteNoteButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(favoriteNoteButtonTapped))
-        navigationItem.rightBarButtonItem = favoriteNoteButton
+        favoriteNoteButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(favoriteNoteButtonTapped))
+        let saveNoteButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(saveNoteButtonTapped))
         
-        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let saveNoteButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(saveNoteButton))
-        setToolbarItems([spaceItem, saveNoteButton, spaceItem], animated: true)
+        navigationItem.rightBarButtonItems = [saveNoteButton, favoriteNoteButton]
     }
     
     func configureUIElements() {
@@ -108,11 +111,11 @@ class NoteVC: NADataLoadingVC {
                 for noteData in favoriteNotes {
                     if noteData.id == data.id {
                         isFavoriteNote = true
-                        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
+                        favoriteNoteButton.image = UIImage(systemName: "star.fill")
                         return
                     } else {
                         isFavoriteNote = false
-                        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+                        favoriteNoteButton.image = UIImage(systemName: "star")
                     }
                 }
             case .failure(let error):
@@ -121,7 +124,7 @@ class NoteVC: NADataLoadingVC {
             
             if self.favoriteNotes.isEmpty {
                 isFavoriteNote = false
-                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
+                favoriteNoteButton.image = UIImage(systemName: "star")
             }
         }
     }
@@ -134,8 +137,8 @@ class NoteVC: NADataLoadingVC {
                 guard let self = self else { return }
                 
                 guard let error = error else {
-                    navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star")
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "You have successfully removed this note 🫡.")
+                    favoriteNoteButton.image = UIImage(systemName: "star")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Successfully removed from favorites 🫡")
                     isFavoriteNote = false
                     return
                 }
@@ -148,8 +151,8 @@ class NoteVC: NADataLoadingVC {
                 guard let self = self else { return }
                 
                 guard let error = error else {
-                    navigationItem.rightBarButtonItem?.image = UIImage(systemName: "star.fill")
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "You have successfully favorited this note 🎉.")
+                    favoriteNoteButton.image = UIImage(systemName: "star.fill")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Succesfully added to favorites 🤩")
                     isFavoriteNote = true
                     return
                 }
@@ -158,7 +161,9 @@ class NoteVC: NADataLoadingVC {
         }
     }
     
-    @objc func saveNoteButton() {
+    @objc func saveNoteButtonTapped() {
+        KeyboardHelper.closeKeyboard(view: view)
+        
         guard let title = noteVC.noteItemViewOne.textView.text,
               let note = noteVC.noteItemViewTwo.textView.text else { return }
         
@@ -180,7 +185,7 @@ class NoteVC: NADataLoadingVC {
                 
                 if code == "common.success" {
                     dismissLoadingView()
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Succesfully updated your note 🎉")
                     
                     if isFavoriteNote {
                         let favoriteNote = GetNoteDataClass(title: title, note: note, id: data.id)

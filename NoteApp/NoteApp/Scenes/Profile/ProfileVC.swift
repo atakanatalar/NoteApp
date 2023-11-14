@@ -33,15 +33,15 @@ class ProfileVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureViewController()
+        configureAppearNavigationController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        
+    }
+    
+    func configureAppearNavigationController() {
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        navigationController?.setToolbarHidden(true, animated: true)
         
         let signOutButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(signOutButtonTapped))
         navigationItem.rightBarButtonItem = signOutButton
@@ -150,6 +150,7 @@ class ProfileVC: NADataLoadingVC {
         navigationController?.pushViewController(destinationVC, animated: true)
         
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Goodbye my friend 👋🏻")
     }
 }
 
@@ -172,7 +173,7 @@ extension ProfileVC: NAUserInfoUpdateVCDelegate {
                 
                 if code == "common.success" {
                     dismissLoadingView()
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success.")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Successfully updated your user info 🎉")
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
@@ -205,7 +206,7 @@ extension ProfileVC: NAUserPasswordUpdateVCDelegate {
                 
                 if code == "user.change-password" {
                     dismissLoadingView()
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success.")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Successfully updated your password 🔐")
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")

@@ -25,6 +25,7 @@ class AddNoteVC: NADataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureViewController()
         configureUIElements()
         layoutUI()
     }
@@ -32,7 +33,7 @@ class AddNoteVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureViewController()
+        configureAppearNavigationController()
         IQKeyboardManager.shared.enable = false
     }
     
@@ -44,12 +45,13 @@ class AddNoteVC: NADataLoadingVC {
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        
+    }
+    
+    func configureAppearNavigationController() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNoteButton))
-        setToolbarItems([spaceItem, addNoteButton, spaceItem], animated: true)
+        let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(addNoteButtonTapped))
+        navigationItem.rightBarButtonItem = addNoteButton
     }
     
     func configureUIElements() {
@@ -83,7 +85,7 @@ class AddNoteVC: NADataLoadingVC {
         childVC.didMove(toParent: self)
     }
     
-    @objc func addNoteButton() {
+    @objc func addNoteButtonTapped() {
         guard let title = addNoteVC.noteItemViewOne.textView.text,
               let note = addNoteVC.noteItemViewTwo.textView.text else { return }
         
@@ -106,7 +108,7 @@ class AddNoteVC: NADataLoadingVC {
                 if code == "common.success" {
                     dismissLoadingView()
                     navigationController?.popViewController(animated: true)
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Success.")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Succesfully added your note 🎉")
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")

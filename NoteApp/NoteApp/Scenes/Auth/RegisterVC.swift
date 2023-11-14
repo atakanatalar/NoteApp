@@ -25,11 +25,16 @@ class RegisterVC: NADataLoadingVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        configureAppearNavigationController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+    }
+    
+    func configureAppearNavigationController() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func configureUIElements() {
@@ -107,7 +112,7 @@ extension RegisterVC: NARegisterInputVCDelegate {
                     navigationController?.pushViewController(destinationVC, animated: true)
                     
                     setRootVC(destinationVC: destinationVC)
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Welcome my friend 🥳.")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Welcome my friend 🥳")
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")

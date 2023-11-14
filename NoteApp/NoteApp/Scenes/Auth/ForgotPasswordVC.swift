@@ -25,11 +25,16 @@ class ForgotPasswordVC: NADataLoadingVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        configureAppearNavigationController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+    }
+    
+    func configureAppearNavigationController() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.tintColor = .systemPurple
     }
     
@@ -99,7 +104,7 @@ extension ForgotPasswordVC: NAForgotPasswordInputVCDelegate {
                     let destinationVC = LoginVC()
                     navigationController?.pushViewController(destinationVC, animated: true)
                     
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "We have send password reset instructions to you email address.")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Check your email 📨")
                 } else {
                     dismissLoadingView()
                     ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")

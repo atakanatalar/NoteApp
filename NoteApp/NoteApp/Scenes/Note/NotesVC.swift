@@ -23,6 +23,7 @@ class NotesVC: NADataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureViewController()
         configureSearchController()
         configureTableView()
         refreshNotes()
@@ -31,7 +32,7 @@ class NotesVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureViewController()
+        configureAppearNavigationController()
         getNotes()
         clearSearchBar()
     }
@@ -39,31 +40,39 @@ class NotesVC: NADataLoadingVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = false
-        
+        configureDisappearNavigationController()
         clearSearchBar()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        
+    }
+    
+    func configureAppearNavigationController() {
         title = "Notes"
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .systemPurple
         
-        navigationController?.setToolbarHidden(false, animated: true)
-        navigationController?.toolbar.tintColor = .systemPurple
-        
         let profileButton = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(profileButtonTapped))
         navigationItem.rightBarButtonItem = profileButton
+        
+        navigationController?.setToolbarHidden(false, animated: true)
+        navigationController?.toolbar.tintColor = .systemPurple
         
         let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let favoriteNotesButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(favoriteNotesButtonTapped))
         let createNoteButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(createNoteButtonTapped))
         let title = UIBarButtonItem(customView: toolbarTitleLabel)
+        
         setToolbarItems([favoriteNotesButton, spaceItem, title, spaceItem, createNoteButton], animated: true)
+    }
+    
+    func configureDisappearNavigationController() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     func configureSearchController() {
@@ -169,7 +178,7 @@ class NotesVC: NADataLoadingVC {
                         tableView.deleteRows(at: [index], with: .left)
                         getNotes()
                         clearSearchBar()
-                        ToastMessageHelper().createToastMessage(toastMessageType: .success, message: message ?? "Resource has been deleted.")
+                        ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Successfully deleted your note 🫡")
                     } else {
                         ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
                     }

@@ -16,31 +16,36 @@ class FavoriteNotesVC: NADataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureViewController()
         configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureViewController()
+        configureAppearNavigationController()
         getNotes()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = false
+        configureDisappearNavigationController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
-        
+    }
+    
+    func configureAppearNavigationController() {
         title = "Favorite Notes"
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        navigationController?.setToolbarHidden(false, animated: true)
+    }
+    
+    func configureDisappearNavigationController() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     func configureTableView() {
@@ -98,7 +103,7 @@ class FavoriteNotesVC: NADataLoadingVC {
                 guard let error = error else {
                     self.data.remove(at: index.row)
                     tableView.deleteRows(at: [index], with: .left)
-                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "You have successfully removed this note 🫡.")
+                    ToastMessageHelper().createToastMessage(toastMessageType: .success, message: "Successfully deleted your note 🫡")
                     
                     if self.data.isEmpty {
                         let message = "There are no favorite notes here. Let's add a note 🥲."
