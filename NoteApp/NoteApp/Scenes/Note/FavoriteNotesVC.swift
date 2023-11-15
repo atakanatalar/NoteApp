@@ -23,29 +23,22 @@ class FavoriteNotesVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureAppearNavigationController()
+        configureNavigationController()
         getNotes()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        configureDisappearNavigationController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    func configureAppearNavigationController() {
+    func configureNavigationController() {
         title = "Favorite Notes"
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    func configureDisappearNavigationController() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     func configureTableView() {

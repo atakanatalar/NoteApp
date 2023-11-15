@@ -42,7 +42,7 @@ class NoteVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureAppearNavigationController()
+        configureNavigationController()
         favoriteNoteCheck()
         IQKeyboardManager.shared.enable = false
     }
@@ -55,10 +55,15 @@ class NoteVC: NADataLoadingVC {
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    func configureAppearNavigationController() {
+    func configureNavigationController() {
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        navigationController?.setToolbarHidden(true, animated: true)
         
         favoriteNoteButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: self, action: #selector(favoriteNoteButtonTapped))
         let saveNoteButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(saveNoteButtonTapped))

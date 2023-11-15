@@ -32,7 +32,7 @@ class NotesVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureAppearNavigationController()
+        configureNavigationController()
         getNotes()
         clearSearchBar()
     }
@@ -40,7 +40,6 @@ class NotesVC: NADataLoadingVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        configureDisappearNavigationController()
         clearSearchBar()
     }
     
@@ -48,7 +47,7 @@ class NotesVC: NADataLoadingVC {
         view.backgroundColor = .systemBackground
     }
     
-    func configureAppearNavigationController() {
+    func configureNavigationController() {
         title = "Notes"
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -66,13 +65,6 @@ class NotesVC: NADataLoadingVC {
         let title = UIBarButtonItem(customView: toolbarTitleLabel)
         
         setToolbarItems([favoriteNotesButton, spaceItem, title, spaceItem, createNoteButton], animated: true)
-    }
-    
-    func configureDisappearNavigationController() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = false
-        
-        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     func configureSearchController() {

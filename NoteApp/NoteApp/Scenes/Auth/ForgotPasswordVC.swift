@@ -26,14 +26,14 @@ class ForgotPasswordVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureAppearNavigationController()
+        configureNavigationController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
     }
     
-    func configureAppearNavigationController() {
+    func configureNavigationController() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.tintColor = .systemPurple
     }

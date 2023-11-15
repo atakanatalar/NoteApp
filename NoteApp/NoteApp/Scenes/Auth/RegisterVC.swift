@@ -26,14 +26,14 @@ class RegisterVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureAppearNavigationController()
+        configureNavigationController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
     }
     
-    func configureAppearNavigationController() {
+    func configureNavigationController() {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     

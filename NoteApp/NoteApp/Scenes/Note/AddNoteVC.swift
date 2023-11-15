@@ -33,7 +33,7 @@ class AddNoteVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureAppearNavigationController()
+        configureNavigationController()
         IQKeyboardManager.shared.enable = false
     }
     
@@ -45,10 +45,15 @@ class AddNoteVC: NADataLoadingVC {
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    func configureAppearNavigationController() {
+    func configureNavigationController() {
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        navigationController?.setToolbarHidden(true, animated: true)
         
         let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(addNoteButtonTapped))
         navigationItem.rightBarButtonItem = addNoteButton

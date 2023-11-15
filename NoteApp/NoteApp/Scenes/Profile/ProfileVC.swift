@@ -33,15 +33,20 @@ class ProfileVC: NADataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureAppearNavigationController()
+        configureNavigationController()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    func configureAppearNavigationController() {
+    func configureNavigationController() {
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        navigationController?.setToolbarHidden(true, animated: true)
         
         let signOutButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(signOutButtonTapped))
         navigationItem.rightBarButtonItem = signOutButton
