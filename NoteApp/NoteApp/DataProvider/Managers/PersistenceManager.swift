@@ -14,8 +14,9 @@ enum PersistenceActionType {
 enum PersistenceManager {
     static private let defaults = UserDefaults.standard
     
-    enum Keys {
-        static let favoriteNotes = "favoriteNotes"
+    static func getUserID() -> String {
+        let userID = "\(String(describing: APIManager.sharedInstance.getMeResponse?.data.id))"
+        return userID
     }
     
     static func updateWith(favoriteNote: GetNoteDataClass, actionType: PersistenceActionType, completed: @escaping (NAError?) -> Void) {
@@ -43,7 +44,7 @@ enum PersistenceManager {
     }
     
     static func retrieveFavorites(completed: @escaping (Result<[GetNoteDataClass], NAError>) -> Void) {
-        guard let favoriteNotesData = defaults.object(forKey: Keys.favoriteNotes) as? Data else {
+        guard let favoriteNotesData = defaults.object(forKey: getUserID()) as? Data else {
             completed(.success([]))
             return
         }
@@ -61,7 +62,7 @@ enum PersistenceManager {
         do {
             let encoder = JSONEncoder()
             let encodedFavoriteNotes = try encoder.encode(favoriteNotes)
-            defaults.set(encodedFavoriteNotes, forKey: Keys.favoriteNotes)
+            defaults.set(encodedFavoriteNotes, forKey: getUserID())
             return nil
         } catch {
             return .unableToFavorite
