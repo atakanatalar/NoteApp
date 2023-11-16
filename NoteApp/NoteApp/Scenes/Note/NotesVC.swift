@@ -33,7 +33,7 @@ class NotesVC: NADataLoadingVC {
         super.viewWillAppear(animated)
         
         configureNavigationController()
-        getNotes()
+        getUserData()
         clearSearchBar()
     }
     
@@ -88,6 +88,20 @@ class NotesVC: NADataLoadingVC {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(getNotes), for: .valueChanged)
         tableView.refreshControl = refreshControl
+    }
+    
+    func getUserData() {
+        let getMeModel = GetMeModel()
+        
+        APIManager.sharedInstance.callingGetMeAPI(getMeModel: getMeModel) { [weak self] isSuccess in
+            guard let self = self else { return }
+            
+            if isSuccess {
+                getNotes()
+            } else {
+                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
+            }
+        }
     }
     
     @objc func getNotes() {

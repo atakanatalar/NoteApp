@@ -24,7 +24,7 @@ class FavoriteNotesVC: NADataLoadingVC {
         super.viewWillAppear(animated)
         
         configureNavigationController()
-        getUserData()
+        getNotes()
     }
     
     func configureViewController() {
@@ -49,33 +49,6 @@ class FavoriteNotesVC: NADataLoadingVC {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NANotesListCell.self, forCellReuseIdentifier: NANotesListCell.reuseID)
-    }
-    
-    func getUserData() {
-        showLoadingView()
-        
-        let getMeModel = GetMeModel()
-        
-        APIManager.sharedInstance.callingGetMeAPI(getMeModel: getMeModel) { [weak self] isSuccess in
-            guard let self = self else { return }
-            
-            if isSuccess {
-                let code = APIManager.sharedInstance.getMeResponse?.code
-                let data = APIManager.sharedInstance.getMeResponse?.data
-                let message = APIManager.sharedInstance.getMeResponse?.message
-                
-                if code == "common.success" {
-                    dismissLoadingView()
-                    getNotes()
-                } else {
-                    dismissLoadingView()
-                    ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: message ?? "Something went wrong.")
-                }
-            } else {
-                dismissLoadingView()
-                ToastMessageHelper().createToastMessage(toastMessageType: .failure, message: "Something went wrong.")
-            }
-        }
     }
     
     func getNotes() {
