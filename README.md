@@ -1,8 +1,8 @@
-![1](https://github.com/atakanatalar/readmeTest/assets/59089304/09c6ff90-1b50-47a3-b2cd-482f4a8fac08)
+![1](https://github.com/atakanatalar/NoteApp/assets/59089304/8cb07b00-2885-4af3-8e28-a133a91c8a1b)
 
 # NoteApp
 
-Capture your thoughts effortlessly with our intuitive note-taking app.
+Capture your thoughts effortlessly with our intuitive note taking app.
 
 ## Description
 
@@ -27,6 +27,8 @@ NoteApp project is implemented using the Model-View-Controller (MVC) architectur
 
 ## Design
 
-![2](https://github.com/atakanatalar/readmeTest/assets/59089304/2c66930c-d81f-4c01-9719-217d1b15e869)
-![3](https://github.com/atakanatalar/readmeTest/assets/59089304/80049edb-8f60-4def-ad88-c44380ac1eef)
-![4](https://github.com/atakanatalar/readmeTest/assets/59089304/83546f06-0a9b-42b6-bb47-30bf29ed94e4)
+To watch the overview video of the functions available on NoteApp, please click [here](https://youtu.be/5cOIfrtTXWw).
+
+![4](https://github.com/atakanatalar/NoteApp/assets/59089304/c7332d74-5ad3-408d-97bb-ddf993ff72c3)
+![5](https://github.com/atakanatalar/NoteApp/assets/59089304/1c8ee013-f8b5-4c2c-b8b7-89553ed3bb6a)
+![6](https://github.com/atakanatalar/NoteApp/assets/59089304/5658c6cb-9ad9-4fe9-b35e-b4ee55777851)
